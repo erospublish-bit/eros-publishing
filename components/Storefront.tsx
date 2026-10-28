@@ -101,11 +101,11 @@ export default function Storefront() {
           <div className="catalog-toolbar"><span className="catalog-count">FEATURED TITLES <b>0{filteredBooks.length}</b></span><label className="search-label"><span className="sr-only">Search books</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search titles, authors, genres…" /></label></div>
           <div className="book-grid">
             {filteredBooks.map((book, index) => <article className="book-card" key={book.id}>
-              <div className="book-image-wrap"><span className="book-number">0{index + 1}</span><CoverArt book={book} /><button className="quick-add" onClick={() => addToCart(book)} aria-label={`Add ${book.title} to bag`}><Plus size={17} /></button></div>
+              <div className="book-image-wrap"><span className="book-number">0{index + 1}</span><CoverArt book={book} /><button className="quick-add" onClick={() => book.id === 'no-love-lost-in-the-village' ? document.getElementById('buy-book')?.scrollIntoView({ behavior: 'smooth' }) : addToCart(book)} aria-label={book.id === 'no-love-lost-in-the-village' ? `Buy ${book.title} from Lulu` : `Add ${book.title} to bag`}>{book.id === 'no-love-lost-in-the-village' ? <ArrowRight size={17} /> : <Plus size={17} />}</button></div>
               <div className="book-meta"><span>{book.genre}</span><span className="book-rating">✦ EROS PICK</span></div>
               <h3>{book.title}</h3><p className="book-author">by {book.author}</p><p className="book-description">{book.description}</p>
               <div className="book-buy-row"><strong>{money(book.price)} <small>from</small></strong><label className="format-select"><span className="sr-only">Format for {book.title}</span><select value={format[book.id] ?? book.formats[0]} onChange={(event) => setFormat((old) => ({ ...old, [book.id]: event.target.value as BookFormat }))}>{book.formats.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={13} /></label></div>
-              <button className="add-button" onClick={() => addToCart(book)}>Add to bag <ArrowRight size={15} /></button>
+              <button className="add-button" onClick={() => book.id === 'no-love-lost-in-the-village' ? document.getElementById('buy-book')?.scrollIntoView({ behavior: 'smooth' }) : addToCart(book)}>{book.id === 'no-love-lost-in-the-village' ? 'Buy from Lulu' : 'Add to bag'} <ArrowRight size={15} /></button>
             </article>)}
             {filteredBooks.length === 0 && <div className="empty-search"><BookOpen size={28}/><h3>No stories found just yet.</h3><p>Try a different title, author, or genre.</p></div>}
           </div>
