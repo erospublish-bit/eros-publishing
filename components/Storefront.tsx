@@ -1,6 +1,7 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { createElement, useMemo, useState } from 'react';
+import Script from 'next/script';
 import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
@@ -100,15 +101,30 @@ export default function Storefront() {
           <div className="catalog-toolbar"><span className="catalog-count">FEATURED TITLES <b>0{filteredBooks.length}</b></span><label className="search-label"><span className="sr-only">Search books</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search titles, authors, genres…" /></label></div>
           <div className="book-grid">
             {filteredBooks.map((book, index) => <article className="book-card" key={book.id}>
-              <div className="book-image-wrap"><span className="book-number">0{index + 1}</span><CoverArt book={book} /><button className="quick-add" onClick={() => addToCart(book)} aria-label={`Add ${book.title} to bag`}><Plus size={17} /></button></div>
+              <div className="book-image-wrap"><span className="book-number">0{index + 1}</span><CoverArt book={book} /><button className="quick-add" onClick={() => book.id === 'no-love-lost-in-the-village' ? document.getElementById('buy-book')?.scrollIntoView({ behavior: 'smooth' }) : addToCart(book)} aria-label={book.id === 'no-love-lost-in-the-village' ? `Buy ${book.title} from Lulu` : `Add ${book.title} to bag`}>{book.id === 'no-love-lost-in-the-village' ? <ArrowRight size={17} /> : <Plus size={17} />}</button></div>
               <div className="book-meta"><span>{book.genre}</span><span className="book-rating">✦ EROS PICK</span></div>
               <h3>{book.title}</h3><p className="book-author">by {book.author}</p><p className="book-description">{book.description}</p>
               <div className="book-buy-row"><strong>{money(book.price)} <small>from</small></strong><label className="format-select"><span className="sr-only">Format for {book.title}</span><select value={format[book.id] ?? book.formats[0]} onChange={(event) => setFormat((old) => ({ ...old, [book.id]: event.target.value as BookFormat }))}>{book.formats.map((item) => <option key={item} value={item}>{item}</option>)}</select><ChevronDown size={13} /></label></div>
-              <button className="add-button" onClick={() => addToCart(book)}>Add to bag <ArrowRight size={15} /></button>
+              <button className="add-button" onClick={() => book.id === 'no-love-lost-in-the-village' ? document.getElementById('buy-book')?.scrollIntoView({ behavior: 'smooth' }) : addToCart(book)}>{book.id === 'no-love-lost-in-the-village' ? 'Buy from Lulu' : 'Add to bag'} <ArrowRight size={15} /></button>
             </article>)}
             {filteredBooks.length === 0 && <div className="empty-search"><BookOpen size={28}/><h3>No stories found just yet.</h3><p>Try a different title, author, or genre.</p></div>}
           </div>
           <p className="demo-note">These are sample titles for the starter project. Replace them with your real catalog before launch.</p>
+        </section>
+
+        <section className="real-book-section" id="buy-book">
+          <Script src="https://js.lulu.com/lulu-buy.js" strategy="afterInteractive" />
+          <div className="real-book-copy">
+            <div className="eyebrow"><span /> BUY DIRECT FROM THE BOOKMAKER</div>
+            <h2>Bring the story<br />to <em>your bookshelf.</em></h2>
+            <p>Discover <strong>No Love Lost in the Village</strong> by B. Eros. Use the secure Lulu purchase experience below to view the product and complete your order through the print-on-demand marketplace.</p>
+            <p className="real-book-note">Price, available formats, shipping, and checkout are provided by Lulu and may vary by destination.</p>
+          </div>
+          <div className="lulu-product-panel">
+            <div className="lulu-product-heading"><span className="lulu-mark">L</span><div><strong>No Love Lost in the Village</strong><small>B. Eros · Suspense fiction</small></div></div>
+            {createElement('lulu-buy-button', { 'buy-button-id': '4b7dbcee-c35e-4ead-9c0a-63ec364c0b9a', variant: 'product-showcase' })}
+            <small className="lulu-powered">Purchase experience powered by Lulu</small>
+          </div>
         </section>
 
         <section className="author-section" id="services"><div className="author-ornament">✦</div><div className="author-copy"><div className="eyebrow"><span /> FOR THE STORYTELLERS</div><h2>Your story deserves<br />to <em>meet the world.</em></h2><p>You bring the words. We’ll help you navigate the path from manuscript to published book with thoughtful support at every step.</p><div className="service-list"><span><i>01</i> Manuscript preparation</span><span><i>02</i> Cover design & formatting</span><span><i>03</i> Self-publishing guidance</span></div><a className="button button-light" href="mailto:authors@erospublishkc.com?subject=Publishing%20services%20inquiry">Explore author services <ArrowRight size={17} /></a><small className="service-note">Service offerings and pricing can be customized before launch.</small></div><div className="author-art"><div className="author-art-ring"/><div className="author-book-stack"><div className="stack-book stack-back"/><div className="stack-book stack-mid"/><div className="stack-book stack-front"><span>YOUR STORY</span><b>THE<br/>BEGINNING</b><small>BY YOU</small></div></div><span className="author-art-star">✧</span><span className="author-art-caption">A NEW CHAPTER STARTS HERE</span></div></section>
