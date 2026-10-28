@@ -9,6 +9,10 @@ export type Book = {
   formats: BookFormat[];
   cover: string;
   featured?: boolean;
+  /** Lulu Buy Button ID for books sold through Lulu. */
+  luluBuyButtonId?: string;
+  /** Lulu widget presentation variant. */
+  luluVariant?: 'product-showcase' | string;
 };
 
 // Demo catalog. Replace these sample titles and prices with your real inventory.
@@ -24,6 +28,8 @@ export const books: Book[] = [
     formats: ['Paperback'],
     cover: '/images/no_love_lost_in_the_village_2400x2400-2.png',
     featured: true,
+    luluBuyButtonId: '4b7dbcee-c35c-4ead-9c0a-63ec364c0b9a',
+    luluVariant: 'product-showcase',
   },
   
   
