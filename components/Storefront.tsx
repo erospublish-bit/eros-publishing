@@ -134,7 +134,7 @@ export default function Storefront() {
               })
             ) : (
               <p className="lulu-loading" role="status">Loading secure purchase options…</p>
-            )})}
+            )}
             <small className="lulu-powered">Purchase experience powered by Lulu</small>
           </div>
         </section>
