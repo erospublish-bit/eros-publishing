@@ -59,10 +59,10 @@ export default function Storefront() {
           <span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span>
         </a>
         <nav className={`main-nav ${mobileMenu ? 'nav-open' : ''}`}>
-          <a href="#books" onClick={() => setMobileMenu(false)}>Books</a>
-          <a href="#formats" onClick={() => setMobileMenu(false)}>Book formats</a>
-          <a href="#services" onClick={() => setMobileMenu(false)}>For authors</a>
-          <a href="#about" onClick={() => setMobileMenu(false)}>Our story</a>
+          <a href="/books" onClick={() => setMobileMenu(false)}>Books</a>
+          <a href="/books#formats" onClick={() => setMobileMenu(false)}>Book formats</a>
+          <a href="/author-services" onClick={() => setMobileMenu(false)}>For authors</a>
+          <a href="/about" onClick={() => setMobileMenu(false)}>Our story</a>
         </nav>
         <div className="header-actions">
           <button className="icon-button bag-button" onClick={() => setCartOpen(true)} aria-label={`Open shopping bag, ${count} items`}><ShoppingBag size={19} /><span>Bag</span><b>{count}</b></button>
@@ -77,7 +77,7 @@ export default function Storefront() {
             <div className="eyebrow"><span /> THE HOME OF STORIES THAT STAY WITH YOU</div>
             <h1>Fall in love<br />with <em>the story.</em></h1>
             <p>From the first spark of an idea to the final page, discover books that move you—and publishing support that helps your own story take flight.</p>
-            <div className="hero-actions"><a className="button button-primary" href="#books">Explore the bookstore <ArrowRight size={17} /></a><a className="text-link" href="#services">Have a manuscript? <ArrowRight size={15} /></a></div>
+            <div className="hero-actions"><a className="button button-primary" href="#books">Explore the bookstore <ArrowRight size={17} /></a><a className="text-link" href="/author-services">Have a manuscript? <ArrowRight size={15} /></a></div>
             <div className="hero-proof"><span className="proof-icon"><Heart size={15} /></span><span>For readers, dreamers, and the authors becoming.</span></div>
           </div>
           <div className="hero-art" aria-label="Decorative mythology-inspired illustration">
@@ -97,7 +97,7 @@ export default function Storefront() {
         </section>
 
         <section className="section books-section" id="books">
-          <div className="section-heading"><div><div className="eyebrow"><span /> THE EROS BOOKSHELF</div><h2>Find your next <em>obsession.</em></h2><p>Stories worth staying up for. Worlds worth returning to.</p></div><a className="text-link" href="#books">Browse our collection <ArrowRight size={15} /></a></div>
+          <div className="section-heading"><div><div className="eyebrow"><span /> THE EROS BOOKSHELF</div><h2>Find your next <em>obsession.</em></h2><p>Stories worth staying up for. Worlds worth returning to.</p></div><a className="text-link" href="/books">Browse our collection <ArrowRight size={15} /></a></div>
           <div className="catalog-toolbar"><span className="catalog-count">FEATURED TITLES <b>0{filteredBooks.length}</b></span><label className="search-label"><span className="sr-only">Search books</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search titles, authors, genres…" /></label></div>
           <div className="book-grid">
             {filteredBooks.map((book, index) => <article className="book-card" key={book.id}>
@@ -127,12 +127,12 @@ export default function Storefront() {
           </div>
         </section>
 
-        <section className="author-section" id="services"><div className="author-ornament">✦</div><div className="author-copy"><div className="eyebrow"><span /> FOR THE STORYTELLERS</div><h2>Your story deserves<br />to <em>meet the world.</em></h2><p>You bring the words. We’ll help you navigate the path from manuscript to published book with thoughtful support at every step.</p><div className="service-list"><span><i>01</i> Manuscript preparation</span><span><i>02</i> Cover design & formatting</span><span><i>03</i> Self-publishing guidance</span></div><a className="button button-light" href="mailto:authors@erospublishkc.com?subject=Publishing%20services%20inquiry">Explore author services <ArrowRight size={17} /></a><small className="service-note">Service offerings and pricing can be customized before launch.</small></div><div className="author-art"><div className="author-art-ring"/><div className="author-book-stack"><div className="stack-book stack-back"/><div className="stack-book stack-mid"/><div className="stack-book stack-front"><span>YOUR STORY</span><b>THE<br/>BEGINNING</b><small>BY YOU</small></div></div><span className="author-art-star">✧</span><span className="author-art-caption">A NEW CHAPTER STARTS HERE</span></div></section>
+        <section className="author-section" id="services"><div className="author-ornament">✦</div><div className="author-copy"><div className="eyebrow"><span /> FOR THE STORYTELLERS</div><h2>Your story deserves<br />to <em>meet the world.</em></h2><p>You bring the words. We’ll help you navigate the path from manuscript to published book with thoughtful support at every step.</p><div className="service-list"><span><i>01</i> Manuscript preparation</span><span><i>02</i> Cover design & formatting</span><span><i>03</i> Self-publishing guidance</span></div><a className="button button-light" href="/author-services">Explore author services <ArrowRight size={17} /></a><small className="service-note">Service offerings and pricing can be customized before launch.</small></div><div className="author-art"><div className="author-art-ring"/><div className="author-book-stack"><div className="stack-book stack-back"/><div className="stack-book stack-mid"/><div className="stack-book stack-front"><span>YOUR STORY</span><b>THE<br/>BEGINNING</b><small>BY YOU</small></div></div><span className="author-art-star">✧</span><span className="author-art-caption">A NEW CHAPTER STARTS HERE</span></div></section>
 
-        <section className="manifesto" id="about"><div className="manifesto-symbol">❧</div><div className="eyebrow"><span /> A NOTE FROM EROS</div><h2>Because every great story<br />begins with a <em>feeling.</em></h2><p>Named for the Greek god associated with love and desire, Eros Publishing celebrates the spark that makes us create, connect, and imagine something beyond ourselves.</p><a className="text-link" href="mailto:hello@erospublishkc.com">Get to know us <ArrowRight size={15}/></a></section>
+        <section className="manifesto" id="about"><div className="manifesto-symbol">❧</div><div className="eyebrow"><span /> A NOTE FROM EROS</div><h2>Because every great story<br />begins with a <em>feeling.</em></h2><p>Named for the Greek god associated with love and desire, Eros Publishing celebrates the spark that makes us create, connect, and imagine something beyond ourselves.</p><a className="text-link" href="/about">Get to know us <ArrowRight size={15}/></a></section>
       </main>
 
-      <footer className="site-footer"><a href="#home" className="brand footer-brand"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></a><p>Stories that stir something eternal.</p><div className="footer-links"><a href="#books">Books</a><a href="#services">Author services</a><a href="mailto:hello@erospublishkc.com">Contact</a></div><small className="copyright">© {new Date().getFullYear()} Eros Publishing. All stories welcome.</small></footer>
+      <footer className="site-footer"><a href="#home" className="brand footer-brand"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></a><p>Stories that stir something eternal.</p><div className="footer-links"><a href="/books">Books</a><a href="/author-services">Author services</a><a href="/about">Our story</a><a href="/contact">Contact</a></div><small className="copyright">© {new Date().getFullYear()} Eros Publishing. All stories welcome.</small></footer>
       
       {cartOpen && <div className="drawer-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setCartOpen(false); }}>
         <aside className="cart-drawer" aria-label="Shopping bag">
