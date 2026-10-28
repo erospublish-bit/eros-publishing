@@ -1,7 +1,16 @@
+/** @jsxRuntime classic */
+/** @jsx createElement */
 'use client';
 
-import { createElement, useMemo, useState } from 'react';
-import Script from 'next/script';
+declare global {
+  namespace JSX {
+    interface Element {}
+    interface IntrinsicAttributes { key?: string | number }
+    interface IntrinsicElements { [elementName: string]: any }
+  }
+}
+
+import { createElement, useEffect, useMemo, useState, type ChangeEvent, type MouseEvent } from 'react';
 import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
@@ -9,7 +18,7 @@ const LULU_BOOK_ID = 'no-love-lost-in-the-village';
 
 type CartLine = { book: Book; format: BookFormat; quantity: number };
 
-const money = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+const money = (value: number): string => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
 
 function CoverArt({ book, large = false }: { book: Book; large?: boolean }) {
   return (
@@ -31,7 +40,15 @@ export default function Storefront() {
   const [notice, setNotice] = useState('');
   const [luluReady, setLuluReady] = useState(false);
 
-  const filteredBooks = useMemo(() => books.filter((book) =>
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://js.lulu.com/lulu-buy.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => script.remove();
+  }, []);
+
+  const filteredBooks: Book[] = useMemo(() => books.filter((book: Book) =>
     `${book.title} ${book.author} ${book.genre}`.toLowerCase().includes(query.toLowerCase())
   ), [query]);
   const count = cart.reduce((sum, line) => sum + line.quantity, 0);
@@ -49,10 +66,24 @@ export default function Storefront() {
     setCartOpen(true);
   }
 
-  function changeQuantity(bookId: string, chosenFormat: BookFormat, delta: number) {
-    setCart((current) => current.map((line) => line.book.id === bookId && line.format === chosenFormat
-      ? { ...line, quantity: line.quantity + delta } : line).filter((line) => line.quantity > 0));
+  function changeQuantity(bookId: string, chosenFormat: BookFormat, delta: number): void {
+    setCart((current: CartLine[]) => current.map((line: CartLine) => line.book.id === bookId && line.format === chosenFormat
+      ? { ...line, quantity: line.quantity + delta } : line).filter((line: CartLine) => line.quantity > 0));
   }
+
+  const handleDrawerBackdropMouseDown = (event: MouseEvent<HTMLDivElement>): void => {
+    if (event.target === event.currentTarget) {
+      setCartOpen(false);
+    }
+  };
+
+  const handleBookSearch = (event: ChangeEvent<HTMLInputElement>): void => {
+    setQuery(event.target.value);
+  };
+
+  const handleFormatChange = (bookId: string) => (event: ChangeEvent<HTMLSelectElement>): void => {
+    setFormat((old: Record<string, BookFormat>) => ({ ...old, [bookId]: event.target.value as BookFormat }));
+  };
 
   return (
     <>
