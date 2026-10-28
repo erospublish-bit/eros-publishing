@@ -1,6 +1,5 @@
 /** @jsxRuntime classic */
 /** @jsx createElement */
-/** @jsxFrag Fragment */
 'use client';
 
 declare global {
@@ -11,7 +10,7 @@ declare global {
   }
 }
 
-import { createElement, Fragment, useEffect, useMemo, useState, type ChangeEvent, type MouseEvent } from 'react';
+import { createElement, useEffect, useMemo, useState, type ChangeEvent, type MouseEvent } from 'react';
 import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
