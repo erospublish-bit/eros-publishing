@@ -102,3 +102,4 @@ A beginner-friendly path is Vercel:
 - **Port 3000 busy:** Next.js may offer another local port; use the URL printed in the terminal.
 - **Changes don't appear:** save the file, then refresh. If needed stop and restart `npm run dev`.
 - **Git push rejected:** check that the GitHub repository URL is correct and that you are authenticated.
+# eros-publishing
