@@ -114,7 +114,11 @@ export default function Storefront() {
         </section>
 
         <section className="real-book-section" id="buy-book">
-          <Script src="https://js.lulu.com/lulu-buy.js" strategy="afterInteractive" />
+          <Script
+            src="https://js.lulu.com/lulu-buy.js"
+            strategy="afterInteractive"
+            onReady={() => setLuluReady(true)}
+          />
           <div className="real-book-copy">
             <div className="eyebrow"><span /> BUY DIRECT FROM THE BOOKMAKER</div>
             <h2>Bring the story<br />to <em>your bookshelf.</em></h2>
@@ -123,7 +127,14 @@ export default function Storefront() {
           </div>
           <div className="lulu-product-panel">
             <div className="lulu-product-heading"><span className="lulu-mark">L</span><div><strong>No Love Lost in the Village</strong><small>B. Eros · Suspense fiction</small></div></div>
-            {createElement('lulu-buy-button', { 'buy-button-id': '4b7dbcee-c35e-4ead-9c0a-63ec364c0b9a', variant: 'product-showcase' })}
+            {luluReady ? (
+              createElement('lulu-buy-button', {
+                'buy-button-id': '4b7dbcee-c35c-4ead-9c0a-63ec364c0b9a',
+                variant: 'product-showcase',
+              })
+            ) : (
+              <p className="lulu-loading" role="status">Loading secure purchase options…</p>
+            )}
             <small className="lulu-powered">Purchase experience powered by Lulu</small>
           </div>
         </section>
