@@ -7,12 +7,9 @@ export type Book = {
   description: string;
   price: number;
   formats: BookFormat[];
-  /**
-   * Relative path to the book cover image (e.g., '/images/cover.png')
-   */
   cover: string;
   featured?: boolean;
-// Sample/demo catalog for development purposes only. Replace these sample titles and prices with your real inventory for production use.
+};
 
 // Demo catalog. Replace these sample titles and prices with your real inventory.
 export const books: Book[] = [
@@ -28,5 +25,6 @@ export const books: Book[] = [
     cover: '/images/no_love_lost_in_the_village_2400x2400-2.png',
     featured: true,
   },
+  
   
 ];
