@@ -1,13 +1,23 @@
+/** @jsxRuntime classic */
+/** @jsx createElement */
+/** @jsxFrag Fragment */
 'use client';
 
-import { createElement, useMemo, useState } from 'react';
-import Script from 'next/script';
+declare global {
+  namespace JSX {
+    interface Element {}
+    interface IntrinsicAttributes { key?: string | number }
+    interface IntrinsicElements { [elementName: string]: any }
+  }
+}
+
+import { createElement, Fragment, useEffect, useMemo, useState, type ChangeEvent, type MouseEvent } from 'react';
 import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
 type CartLine = { book: Book; format: BookFormat; quantity: number };
 
-const money = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+const money = (value: number): string => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
 
 function CoverArt({ book, large = false }: { book: Book; large?: boolean }) {
   return (
@@ -28,27 +38,49 @@ export default function Storefront() {
   const [format, setFormat] = useState<Record<string, BookFormat>>({});
   const [notice, setNotice] = useState('');
 
-  const filteredBooks = useMemo(() => books.filter((book) =>
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://js.lulu.com/lulu-buy.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => script.remove();
+  }, []);
+
+  const filteredBooks: Book[] = useMemo(() => books.filter((book: Book) =>
     `${book.title} ${book.author} ${book.genre}`.toLowerCase().includes(query.toLowerCase())
   ), [query]);
-  const count = cart.reduce((sum, line) => sum + line.quantity, 0);
-  const subtotal = cart.reduce((sum, line) => sum + line.book.price * line.quantity, 0);
+  const count: number = cart.reduce<number>((sum: number, line: CartLine) => sum + line.quantity, 0);
+  const subtotal: number = cart.reduce<number>((sum: number, line: CartLine) => sum + line.book.price * line.quantity, 0);
 
-  function addToCart(book: Book) {
-    const chosen = format[book.id] ?? book.formats[0];
-    setCart((current) => {
-      const existing = current.find((line) => line.book.id === book.id && line.format === chosen);
-      if (existing) return current.map((line) => line === existing ? { ...line, quantity: line.quantity + 1 } : line);
+  function addToCart(book: Book): void {
+    const chosen: BookFormat = format[book.id] ?? book.formats[0];
+    setCart((current: CartLine[]) => {
+      const existing: CartLine | undefined = current.find((line: CartLine) => line.book.id === book.id && line.format === chosen);
+      if (existing) return current.map((line: CartLine) => line === existing ? { ...line, quantity: line.quantity + 1 } : line);
       return [...current, { book, format: chosen, quantity: 1 }];
     });
     setNotice(`${book.title} added to your bag.`);
     setCartOpen(true);
   }
 
-  function changeQuantity(bookId: string, chosenFormat: BookFormat, delta: number) {
-    setCart((current) => current.map((line) => line.book.id === bookId && line.format === chosenFormat
-      ? { ...line, quantity: line.quantity + delta } : line).filter((line) => line.quantity > 0));
+  function changeQuantity(bookId: string, chosenFormat: BookFormat, delta: number): void {
+    setCart((current: CartLine[]) => current.map((line: CartLine) => line.book.id === bookId && line.format === chosenFormat
+      ? { ...line, quantity: line.quantity + delta } : line).filter((line: CartLine) => line.quantity > 0));
   }
+
+  const handleDrawerBackdropMouseDown = (event: MouseEvent<HTMLDivElement>): void => {
+    if (event.target === event.currentTarget) {
+      setCartOpen(false);
+    }
+  };
+
+  const handleBookSearch = (event: ChangeEvent<HTMLInputElement>): void => {
+    setQuery(event.target.value);
+  };
+
+  const handleFormatChange = (bookId: string) => (event: ChangeEvent<HTMLSelectElement>): void => {
+    setFormat((old: Record<string, BookFormat>) => ({ ...old, [bookId]: event.target.value as BookFormat }));
+  };
 
   return (
     <>
@@ -113,7 +145,6 @@ export default function Storefront() {
         </section>
 
         <section className="real-book-section" id="buy-book">
-          <Script src="https://js.lulu.com/lulu-buy.js" strategy="afterInteractive" />
           <div className="real-book-copy">
             <div className="eyebrow"><span /> BUY DIRECT FROM THE BOOKMAKER</div>
             <h2>Bring the story<br />to <em>your bookshelf.</em></h2>
