@@ -6,6 +6,7 @@
 @media(max-width:390px){.hero h1{font-size:54px}.book-grid{grid-template-columns:1fr}.book-image-wrap{height:290px}.book-cover{transform:none;width:155px;height:230px}.book-description{min-height:0}.book-buy-row{flex-direction:row;align-items:center}.book-card h3{font-size:22px}}
 
 /* Lulu real-world book purchasing section */
+.book-cover-image{object-fit:cover}
 .real-book-section{display:grid;grid-template-columns:1fr minmax(300px,.85fr);gap:clamp(32px,7vw,100px);align-items:center;padding:95px 10%;background:var(--paper-dark,var(--paper));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .real-book-copy h2{font-family:var(--serif);font-size:clamp(38px,4.3vw,58px);line-height:1.08;font-weight:500;letter-spacing:-1.5px;margin:18px 0}
 .real-book-copy h2 em{color:var(--red);font-weight:400}
