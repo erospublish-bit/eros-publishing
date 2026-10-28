@@ -14,6 +14,8 @@ import { createElement, useEffect, useMemo, useState, type ChangeEvent, type Mou
 import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
+const LULU_BOOK_ID = 'no-love-lost-in-the-village';
+
 type CartLine = { book: Book; format: BookFormat; quantity: number };
 
 const money = (value: number): string => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
@@ -36,6 +38,7 @@ export default function Storefront() {
   const [query, setQuery] = useState('');
   const [format, setFormat] = useState<Record<string, BookFormat>>({});
   const [notice, setNotice] = useState('');
+  const [luluReady, setLuluReady] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -48,14 +51,15 @@ export default function Storefront() {
   const filteredBooks: Book[] = useMemo(() => books.filter((book: Book) =>
     `${book.title} ${book.author} ${book.genre}`.toLowerCase().includes(query.toLowerCase())
   ), [query]);
-  const count: number = cart.reduce<number>((sum: number, line: CartLine) => sum + line.quantity, 0);
-  const subtotal: number = cart.reduce<number>((sum: number, line: CartLine) => sum + line.book.price * line.quantity, 0);
+  const count = cart.reduce((sum, line) => sum + line.quantity, 0);
+  const subtotal = cart.reduce((sum, line) => sum + line.book.price * line.quantity, 0);
+  const luluBook = books.find((book) => book.id === LULU_BOOK_ID);
 
-  function addToCart(book: Book): void {
-    const chosen: BookFormat = format[book.id] ?? book.formats[0];
-    setCart((current: CartLine[]) => {
-      const existing: CartLine | undefined = current.find((line: CartLine) => line.book.id === book.id && line.format === chosen);
-      if (existing) return current.map((line: CartLine) => line === existing ? { ...line, quantity: line.quantity + 1 } : line);
+  function addToCart(book: Book) {
+    const chosen = format[book.id] ?? book.formats[0];
+    setCart((current) => {
+      const existing = current.find((line) => line.book.id === book.id && line.format === chosen);
+      if (existing) return current.map((line) => line === existing ? { ...line, quantity: line.quantity + 1 } : line);
       return [...current, { book, format: chosen, quantity: 1 }];
     });
     setNotice(`${book.title} added to your bag.`);
@@ -144,6 +148,11 @@ export default function Storefront() {
         </section>
 
         <section className="real-book-section" id="buy-book">
+          <Script
+            src="https://js.lulu.com/lulu-buy.js"
+            strategy="afterInteractive"
+            onReady={() => setLuluReady(true)}
+          />
           <div className="real-book-copy">
             <div className="eyebrow"><span /> BUY DIRECT FROM THE BOOKMAKER</div>
             <h2>Bring the story<br />to <em>your bookshelf.</em></h2>
@@ -152,7 +161,14 @@ export default function Storefront() {
           </div>
           <div className="lulu-product-panel">
             <div className="lulu-product-heading"><span className="lulu-mark">L</span><div><strong>No Love Lost in the Village</strong><small>B. Eros · Suspense fiction</small></div></div>
-            {createElement('lulu-buy-button', { 'buy-button-id': '4b7dbcee-c35e-4ead-9c0a-63ec364c0b9a', variant: 'product-showcase' })}
+            {luluReady ? (
+              createElement('lulu-buy-button', {
+                'buy-button-id': luluBook?.luluBuyButtonId ?? '4b7dbcee-c35c-4ead-9c0a-63ec364c0b9a',
+                variant: luluBook?.luluVariant ?? 'product-showcase',
+              })
+            ) : (
+              <p className="lulu-loading" role="status">Loading secure purchase options…</p>
+            )}
             <small className="lulu-powered">Purchase experience powered by Lulu</small>
           </div>
         </section>
