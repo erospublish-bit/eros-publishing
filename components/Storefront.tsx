@@ -5,6 +5,8 @@ import Script from 'next/script';
 import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
+const LULU_BOOK_ID = 'no-love-lost-in-the-village';
+
 type CartLine = { book: Book; format: BookFormat; quantity: number };
 
 const money = (value: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
@@ -34,6 +36,7 @@ export default function Storefront() {
   ), [query]);
   const count = cart.reduce((sum, line) => sum + line.quantity, 0);
   const subtotal = cart.reduce((sum, line) => sum + line.book.price * line.quantity, 0);
+  const luluBook = books.find((book) => book.id === LULU_BOOK_ID);
 
   function addToCart(book: Book) {
     const chosen = format[book.id] ?? book.formats[0];
@@ -129,8 +132,8 @@ export default function Storefront() {
             <div className="lulu-product-heading"><span className="lulu-mark">L</span><div><strong>No Love Lost in the Village</strong><small>B. Eros · Suspense fiction</small></div></div>
             {luluReady ? (
               createElement('lulu-buy-button', {
-                'buy-button-id': '4b7dbcee-c35c-4ead-9c0a-63ec364c0b9a',
-                variant: 'product-showcase',
+                'buy-button-id': luluBook?.luluBuyButtonId ?? '4b7dbcee-c35c-4ead-9c0a-63ec364c0b9a',
+                variant: luluBook?.luluVariant ?? 'product-showcase',
               })
             ) : (
               <p className="lulu-loading" role="status">Loading secure purchase options…</p>
