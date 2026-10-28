@@ -7,9 +7,12 @@ export type Book = {
   description: string;
   price: number;
   formats: BookFormat[];
+  /**
+   * Relative path to the book cover image (e.g., '/images/cover.png')
+   */
   cover: string;
   featured?: boolean;
-};
+// Sample/demo catalog for development purposes only. Replace these sample titles and prices with your real inventory for production use.
 
 // Demo catalog. Replace these sample titles and prices with your real inventory.
 export const books: Book[] = [
@@ -22,9 +25,8 @@ export const books: Book[] = [
       "In the seemingly ordinary village of Northern Point, corruption, betrayal, and deception run deeper than anyone wants to admit. When Raz begins uncovering the truth behind Cleptes Corp. and the people pulling the strings, buried secrets, stolen credit, and questionable loyalties threaten to bring the entire village crashing down. Armed with evidence, determination, and a refusal to accept blame for someone else's bs, Raz discovers that the closer you get to the truth, the harder it becomes to know who you can trust. No Love Lost in the Village is a dark, sharp-witted suspense novel about power, accountability, greed, and the dangerous price of exposing the truth.",
     price: 14.99,
     formats: ['Paperback'],
-    cover: 'images/no-love-lost-in-the-village.jpg',
+    cover: '/images/no_love_lost_in_the_village_2400x2400-2.png',
     featured: true,
   },
-  
   
 ];
