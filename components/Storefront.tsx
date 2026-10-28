@@ -27,6 +27,7 @@ export default function Storefront() {
   const [query, setQuery] = useState('');
   const [format, setFormat] = useState<Record<string, BookFormat>>({});
   const [notice, setNotice] = useState('');
+  const [luluReady, setLuluReady] = useState(false);
 
   const filteredBooks = useMemo(() => books.filter((book) =>
     `${book.title} ${book.author} ${book.genre}`.toLowerCase().includes(query.toLowerCase())
