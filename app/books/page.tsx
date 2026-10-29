@@ -38,7 +38,11 @@ export default function BooksPage() {
         </p>
 
         {formats.map(({ id, format, title, emptyMessage }) => {
-          const formatBooks = books.filter((book) => book.formats.includes(format));
+          const formatBooks = books.filter(
+            (book) =>
+              book.formats.includes(format) ||
+              (format === 'Audiobook' && Boolean(book.audiobookUrl)),
+          );
 
           return (
             <section className="book-format-section" id={id} key={format}>
@@ -53,7 +57,11 @@ export default function BooksPage() {
                         {book.genre} by {book.author}
                       </p>
                       <p>{book.description}</p>
-                      {book.luluBuyButtonId ? (
+                      {format === 'Audiobook' && book.audiobookUrl ? (
+                        <a href={book.audiobookUrl} target="_blank" rel="noreferrer">
+                          Listen on Spotify ↗
+                        </a>
+                      ) : book.luluBuyButtonId ? (
                         <a
                           href={`https://svc.lulu.com/?items=${book.luluBuyButtonId}`}
                           target="_blank"

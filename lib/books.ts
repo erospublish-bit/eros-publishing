@@ -13,6 +13,7 @@ export type Book = {
   featured?: boolean;
   /** Lulu Buy Button ID for books sold through Lulu. */
   luluBuyButtonId?: string;
+  audiobookUrl?: string;
   /** Lulu widget presentation variant. */
   luluVariant?: 'product-showcase' | string;
 };
@@ -31,6 +32,8 @@ export const books: Book[] = [
     cover: noLoveLostCover.src,
     featured: true,
     luluBuyButtonId: '4b7dbcee-c35c-4ead-9c0a-63ec364c0b9a',
+    audiobookUrl:
+      'https://open.spotify.com/show/5SOdZRxwlPaaIaHKHXjB6c?si=rQ-F78cWTyeHqNsdUPtBNw&utm_source=copy-link',
     luluVariant: 'product-showcase',
   },
   
