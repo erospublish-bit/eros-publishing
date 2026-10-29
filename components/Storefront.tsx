@@ -1,16 +1,8 @@
-/** @jsxRuntime classic */
-/** @jsx createElement */
+/** @jsxRuntime automatic */
 'use client';
 
-declare global {
-  namespace JSX {
-    interface Element {}
-    interface IntrinsicAttributes { key?: string | number }
-    interface IntrinsicElements { [elementName: string]: any }
-  }
-}
-
-import { createElement, useEffect, useMemo, useState, type ChangeEvent, type MouseEvent } from 'react';
+import { createElement, Fragment, useEffect, useMemo, useState, type ChangeEvent, type MouseEvent } from 'react';
+import Image from 'next/image';
 import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
@@ -22,11 +14,17 @@ const money = (value: number): string => new Intl.NumberFormat('en-US', { style:
 
 function CoverArt({ book, large = false }: { book: Book; large?: boolean }) {
   return (
-    <div className={`book-cover ${book.cover} ${large ? 'book-cover-large' : ''}`} aria-label={`Decorative cover concept for ${book.title}`} role="img">
-      <span className="cover-kicker">AN EROS PUBLISHING TITLE</span>
-      <span className="cover-symbol">✦</span>
-      <strong>{book.title}</strong>
-      <span className="cover-author">{book.author}</span>
+    <div className={`book-cover ${large ? 'book-cover-large' : ''}`} aria-label={`Cover of ${book.title}`} role="img">
+      {book.cover ? (
+        <Image className="book-cover-image" src={book.cover} alt="" fill sizes="(max-width: 700px) 130px, 155px" />
+      ) : (
+        <>
+          <span className="cover-kicker">AN EROS PUBLISHING TITLE</span>
+          <span className="cover-symbol">✦</span>
+          <strong>{book.title}</strong>
+          <span className="cover-author">{book.author}</span>
+        </>
+      )}
     </div>
   );
 }
@@ -44,8 +42,12 @@ export default function Storefront() {
     const script = document.createElement('script');
     script.src = 'https://js.lulu.com/lulu-buy.js';
     script.async = true;
+    script.onload = () => setLuluReady(true);
     document.body.appendChild(script);
-    return () => script.remove();
+    return () => {
+      script.onload = null;
+      script.remove();
+    };
   }, []);
 
   const filteredBooks: Book[] = useMemo(() => books.filter((book: Book) =>
@@ -148,11 +150,6 @@ export default function Storefront() {
         </section>
 
         <section className="real-book-section" id="buy-book">
-          <Script
-            src="https://js.lulu.com/lulu-buy.js"
-            strategy="afterInteractive"
-            onReady={() => setLuluReady(true)}
-          />
           <div className="real-book-copy">
             <div className="eyebrow"><span /> BUY DIRECT FROM THE BOOKMAKER</div>
             <h2>Bring the story<br />to <em>your bookshelf.</em></h2>
