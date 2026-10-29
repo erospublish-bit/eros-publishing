@@ -1,4 +1,4 @@
-# Eros Publishing — storefront starter
+# Eros Publishing — storefront
 
 A responsive, mythology-inspired red/burgundy storefront for **erospublishingkc.com**, built with Next.js, React, TypeScript, and custom CSS.
 
