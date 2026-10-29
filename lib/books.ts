@@ -14,6 +14,7 @@ export type Book = {
   /** Lulu Buy Button ID for books sold through Lulu. */
   luluBuyButtonId?: string;
   audiobookUrl?: string;
+  ebookLinks?: { label: string; url: string }[];
   /** Lulu widget presentation variant. */
   luluVariant?: 'product-showcase' | string;
 };
@@ -34,6 +35,13 @@ export const books: Book[] = [
     luluBuyButtonId: '4b7dbcee-c35c-4ead-9c0a-63ec364c0b9a',
     audiobookUrl:
       'https://open.spotify.com/show/5SOdZRxwlPaaIaHKHXjB6c?si=rQ-F78cWTyeHqNsdUPtBNw&utm_source=copy-link',
+    ebookLinks: [
+      { label: 'Apple Books', url: 'http://books.apple.com/us/book/id6822292321' },
+      {
+        label: 'Barnes & Noble',
+        url: 'https://www.barnesandnoble.com/w/no-love-lost-in-the-village-b-eros/1151674194?ean=2940185495438',
+      },
+    ],
     luluVariant: 'product-showcase',
   },
   

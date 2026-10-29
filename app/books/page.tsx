@@ -41,7 +41,8 @@ export default function BooksPage() {
           const formatBooks = books.filter(
             (book) =>
               book.formats.includes(format) ||
-              (format === 'Audiobook' && Boolean(book.audiobookUrl)),
+              (format === 'Audiobook' && Boolean(book.audiobookUrl)) ||
+              (format === 'Ebook' && Boolean(book.ebookLinks?.length)),
           );
 
           return (
@@ -57,7 +58,15 @@ export default function BooksPage() {
                         {book.genre} by {book.author}
                       </p>
                       <p>{book.description}</p>
-                      {format === 'Audiobook' && book.audiobookUrl ? (
+                      {format === 'Ebook' && book.ebookLinks ? (
+                        <div className="format-store-links">
+                          {book.ebookLinks.map(({ label, url }) => (
+                            <a key={label} href={url} target="_blank" rel="noreferrer">
+                              {label} ↗
+                            </a>
+                          ))}
+                        </div>
+                      ) : format === 'Audiobook' && book.audiobookUrl ? (
                         <a href={book.audiobookUrl} target="_blank" rel="noreferrer">
                           Listen on Spotify ↗
                         </a>

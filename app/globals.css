@@ -45,6 +45,7 @@
 .format-card-grid .page-card{min-height:0}
 .format-card-grid .page-card h4{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 8px}
 .format-book-byline{font-size:12px!important;font-weight:700;color:var(--ink)!important}
+.format-store-links{display:flex;flex-wrap:wrap;gap:8px 18px}
 .format-empty-state{padding:20px 22px;border:1px dashed var(--line);color:var(--muted);font-size:13px;line-height:1.8}
 .page-cta-panel{padding:clamp(28px,5vw,50px);background:var(--red-dark);color:var(--cream);margin-top:35px}
 .page-cta-panel h2{font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;margin:0 0 12px}
