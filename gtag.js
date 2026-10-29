@@ -1,7 +1,15 @@
-<><script async src="https://www.googletagmanager.com/gtag/js?id=G-1M5DXNQF7F"></script><script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+window.dataLayer = window.dataLayer || [];
 
-    gtag('config', 'G-1M5DXNQF7F');
-</script></>
+function gtag() {
+  window.dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+gtag('config', 'G-1M5DXNQF7F');
+
+(function () {
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=G-1M5DXNQF7F';
+  document.head.appendChild(script);
+})();
