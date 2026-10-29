@@ -12,18 +12,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-1M5DXNQF7F"
-          strategy="afterInteractive"
-        />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-1M5DXNQF7F" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
-            function gtag(){window.dataLayer.push(arguments);}
+            function gtag() {
+              window.dataLayer.push(arguments);
+            }
             gtag('js', new Date());
             gtag('config', 'G-1M5DXNQF7F');
           `}
         </Script>
+
         {children}
       </body>
     </html>
