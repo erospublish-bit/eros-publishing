@@ -38,6 +38,14 @@
 .page-card a{color:var(--red);font-size:12px;font-weight:700}
 .page-section-heading{font-family:var(--serif);font-weight:500;font-size:clamp(28px,4vw,42px);margin:0 0 16px}
 .page-lead{max-width:760px;color:var(--muted);font-size:14px;line-height:1.95;margin:0 0 30px}
+.book-formats{scroll-margin-top:100px}
+.book-format-section{padding:28px 0;border-top:1px solid var(--line);scroll-margin-top:100px}
+.book-format-heading{font-family:var(--serif);font-weight:500;font-size:clamp(24px,3vw,32px);margin:0 0 18px}
+.format-card-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.format-card-grid .page-card{min-height:0}
+.format-card-grid .page-card h4{font-family:var(--serif);font-weight:500;font-size:22px;margin:0 0 8px}
+.format-book-byline{font-size:12px!important;font-weight:700;color:var(--ink)!important}
+.format-empty-state{padding:20px 22px;border:1px dashed var(--line);color:var(--muted);font-size:13px;line-height:1.8}
 .page-cta-panel{padding:clamp(28px,5vw,50px);background:var(--red-dark);color:var(--cream);margin-top:35px}
 .page-cta-panel h2{font-family:var(--serif);font-size:clamp(28px,4vw,42px);font-weight:400;margin:0 0 12px}
 .page-cta-panel p{max-width:650px;color:#f1ded8;line-height:1.8;font-size:13px}
