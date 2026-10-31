@@ -6,11 +6,46 @@ import { PageShell } from '@/components/PageShell';
 import { books } from '@/lib/books';
 
 const book = books.find((item) => item.id === 'no-love-lost-in-the-village')!;
+const bookUrl = 'https://erospublishingkc.com/books/no-love-lost-in-the-village';
+const coverUrl = 'https://erospublishingkc.com/_next/static/media/no_love_lost_in_the_village_2400x2400-2.png';
 
 export const metadata: Metadata = {
   title: 'No Love Lost in the Village by B. Eros | Eros Publishing',
   description:
     'Discover No Love Lost in the Village by B. Eros, a dark suspense novel about corruption, betrayal, power, and the dangerous price of exposing the truth.',
+  alternates: {
+    canonical: bookUrl,
+  },
+};
+
+const bookStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Book',
+  '@id': `${bookUrl}#book`,
+  name: book.title,
+  url: bookUrl,
+  description:
+    'A dark, sharp-witted suspense novel about corruption, betrayal, accountability, greed, and the dangerous price of exposing the truth.',
+  image: coverUrl,
+  author: {
+    '@type': 'Person',
+    name: book.author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Eros Publishing',
+    url: 'https://erospublishingkc.com',
+  },
+  genre: ['Crime', 'Suspense fiction'],
+  inLanguage: 'en-US',
+  bookFormat: 'https://schema.org/Paperback',
+  offers: {
+    '@type': 'Offer',
+    url: bookUrl,
+    price: book.price.toFixed(2),
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
 };
 
 export default function NoLoveLostInTheVillagePage() {
@@ -21,6 +56,11 @@ export default function NoLoveLostInTheVillagePage() {
       accent="in the Village."
       intro="A dark, sharp-witted suspense novel about corruption, betrayal, accountability, greed, and the dangerous price of exposing the truth."
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(bookStructuredData).replace(/</g, '\\u003c') }}
+      />
+
       <section className="book-detail-layout">
         <div className="book-detail-cover-wrap">
           <Image
