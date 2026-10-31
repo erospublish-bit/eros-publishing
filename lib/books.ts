@@ -19,7 +19,6 @@ export type Book = {
   luluVariant?: 'product-showcase' | string;
 };
 
-// Demo catalog. Replace these sample titles and prices with your real inventory.
 export const books: Book[] = [
   {
     id: 'no-love-lost-in-the-village',
