@@ -22,7 +22,7 @@ export function PageShell({ eyebrow, title, accent, intro, children }: PageShell
       <footer className="site-footer">
         <Link href="/" className="brand footer-brand"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></Link>
         <p>Stories that stir something eternal.</p>
-        <div className="footer-links"><Link href="/books">Books</Link><Link href="/blog">Blog</Link><Link href="/author-services">Author services</Link><Link href="/about">Our story</Link><Link href="/contact">Contact</Link></div>
+        <div className="footer-links"><Link href="/books">Books</Link><Link href="/blog">Blog</Link><Link href="/author-services">Author services</Link><Link href="/about">Our story</Link><Link href="/contact">Contact</Link><Link href="/legal">Legal & policies</Link></div>
         <small className="copyright">© {new Date().getFullYear()} Eros Publishing. All stories welcome.</small>
       </footer>
     </>
