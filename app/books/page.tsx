@@ -3,24 +3,9 @@ import { PageShell } from '@/components/PageShell';
 import { books, type BookFormat } from '@/lib/books';
 
 const formats: { id: string; format: BookFormat; title: string; emptyMessage: string }[] = [
-  {
-    id: 'paperback',
-    format: 'Paperback',
-    title: 'Paperback',
-    emptyMessage: 'No paperback editions are available yet.',
-  },
-  {
-    id: 'audiobooks',
-    format: 'Audiobook',
-    title: 'Audiobooks',
-    emptyMessage: 'No audiobook editions are available yet.',
-  },
-  {
-    id: 'ebooks',
-    format: 'Ebook',
-    title: 'E-books',
-    emptyMessage: 'No e-book editions are available yet.',
-  },
+  { id: 'paperback', format: 'Paperback', title: 'Paperback', emptyMessage: 'No paperback editions are available yet.' },
+  { id: 'audiobooks', format: 'Audiobook', title: 'Audiobooks', emptyMessage: 'No audiobook editions are available yet.' },
+  { id: 'ebooks', format: 'Ebook', title: 'E-books', emptyMessage: 'No e-book editions are available yet.' },
 ];
 
 export default function BooksPage() {
@@ -33,16 +18,11 @@ export default function BooksPage() {
     >
       <div id="formats" className="book-formats">
         <h2 className="page-section-heading">Browse by format</h2>
-        <p className="page-lead">
-          Find the edition that fits the way you love to read.
-        </p>
+        <p className="page-lead">Find the edition that fits the way you love to read.</p>
 
         {formats.map(({ id, format, title, emptyMessage }) => {
           const formatBooks = books.filter(
-            (book) =>
-              book.formats.includes(format) ||
-              (format === 'Audiobook' && Boolean(book.audiobookUrl)) ||
-              (format === 'Ebook' && Boolean(book.ebookLinks?.length)),
+            (book) => book.formats.includes(format) || (format === 'Audiobook' && Boolean(book.audiobookUrl)) || (format === 'Ebook' && Boolean(book.ebookLinks?.length)),
           );
 
           return (
@@ -54,39 +34,22 @@ export default function BooksPage() {
                     <article className="page-card" key={book.id}>
                       <div className="card-icon" aria-hidden="true">✦</div>
                       <h4>{book.title}</h4>
-                      <p className="format-book-byline">
-                        {book.genre} by {book.author}
-                      </p>
+                      <p className="format-book-byline">{book.genre} by {book.author}</p>
                       <p>{book.description}</p>
-                      {format === 'Ebook' && book.ebookLinks ? (
-                        <div className="format-store-links">
-                          {book.ebookLinks.map(({ label, url }) => (
-                            <a key={label} href={url} target="_blank" rel="noreferrer">
-                              {label} ↗
-                            </a>
-                          ))}
-                        </div>
-                      ) : format === 'Audiobook' && book.audiobookUrl ? (
-                        <a href={book.audiobookUrl} target="_blank" rel="noreferrer">
-                          Listen on Spotify ↗
-                        </a>
-                      ) : book.luluBuyButtonId ? (
-                        <a
-                          href={`https://svc.lulu.com/?items=${book.luluBuyButtonId}`}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Visit our Marketplace ↗
-                        </a>
-                      ) : (
-                        <Link href="/#buy-book">View purchase options →</Link>
-                      )}
+                      <div className="format-store-links">
+                        <Link href={`/books/${book.id}`}>View book details →</Link>
+                        {format === 'Ebook' && book.ebookLinks ? book.ebookLinks.map(({ label, url }) => (
+                          <a key={label} href={url} target="_blank" rel="noreferrer">{label} ↗</a>
+                        )) : format === 'Audiobook' && book.audiobookUrl ? (
+                          <a href={book.audiobookUrl} target="_blank" rel="noreferrer">Listen on Spotify ↗</a>
+                        ) : book.luluBuyButtonId ? (
+                          <a href={`https://svc.lulu.com/?items=${book.luluBuyButtonId}`} target="_blank" rel="noreferrer">Visit our Marketplace ↗</a>
+                        ) : null}
+                      </div>
                     </article>
                   ))}
                 </div>
-              ) : (
-                <p className="format-empty-state">{emptyMessage}</p>
-              )}
+              ) : <p className="format-empty-state">{emptyMessage}</p>}
             </section>
           );
         })}
@@ -94,14 +57,8 @@ export default function BooksPage() {
 
       <section className="page-cta-panel">
         <h2>Ready to bring a story home?</h2>
-        <p>
-          Visit the featured purchase section to access the embedded buying
-          experience, where current price, format, shipping, and checkout details
-          are supplied by one of many partners.
-        </p>
-        <Link className="button button-light" href="/#buy-book">
-          Buy the featured book →
-        </Link>
+        <p>Open a book page to read the synopsis, explore available formats, and choose your preferred retailer or listening platform.</p>
+        <Link className="button button-light" href="/books/no-love-lost-in-the-village">View the featured book →</Link>
       </section>
     </PageShell>
   );
