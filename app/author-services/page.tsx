@@ -132,7 +132,7 @@ export default function AuthorServicesPage() {
           and the publishing support you are looking for. We will use that information to discuss the
           project and determine an appropriate scope.
         </p>
-        <Link className="button button-light" href="/contact">
+        <Link className="button button-light" href="/publishing-quote">
           Request a Publishing Quote →
         </Link>
         <p>
