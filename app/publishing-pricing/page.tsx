@@ -31,6 +31,54 @@ const individualServices = [
   ['30-Day Publishing Support', '$199'],
 ];
 
+const distributionPackages = [
+  {
+    name: 'Launch',
+    price: '$199',
+    tagline: 'For authors who need professional setup on one publishing platform.',
+    features: [
+      'Setup assistance for 1 distribution platform',
+      'Book upload and configuration',
+      'Basic metadata setup',
+      'Pricing assistance',
+      'Retail listing quality check',
+      '1 correction round',
+    ],
+  },
+  {
+    name: 'Wide Release',
+    price: '$399',
+    tagline: 'Our recommended option for authors who want broad distribution.',
+    featured: true,
+    features: [
+      'Setup assistance for up to 4 distribution platforms',
+      'Book upload and configuration',
+      'Metadata, categories, and keywords',
+      'Pricing and territory assistance',
+      'ISBN guidance',
+      'Retail listing quality check',
+      '1 correction round',
+    ],
+  },
+  {
+    name: 'Publisher Pro',
+    price: '$699',
+    tagline: 'Expanded distribution support with launch guidance and post-launch assistance.',
+    features: [
+      'Setup assistance for up to 5 distribution platforms',
+      'Book upload and configuration',
+      'Metadata, categories, and keywords',
+      'Pricing and territory assistance',
+      'ISBN guidance',
+      'Distribution strategy',
+      'Retail listing quality check',
+      'Launch consultation',
+      '2 correction rounds',
+      '30 days of post-launch support',
+    ],
+  },
+];
+
 const packages = [
   {
     name: 'Essential',
@@ -107,6 +155,34 @@ export default function PublishingPricingPage() {
       accent="without giving up your royalties."
       intro="Choose the publishing support that fits your book. Eros Publishing offers transparent service-based pricing for editing, design, formatting, distribution setup, and complete self-publishing packages."
     >
+      <section>
+        <h2 className="page-section-heading">Self-Publishing & Distribution Setup</h2>
+        <p className="page-lead">
+          Get your book professionally prepared and configured for major publishing and distribution platforms.
+          Your retailer accounts remain in your name, platform royalties are paid directly to you, and Eros Publishing
+          charges a one-time professional service fee instead of taking an additional percentage of your royalties.
+        </p>
+        <div className="page-card-grid">
+          {distributionPackages.map((pkg) => (
+            <article className="page-card" key={pkg.name}>
+              <div className="card-icon">{pkg.featured ? 'MOST POPULAR' : 'DISTRIBUTION'}</div>
+              <h3>{pkg.name}</h3>
+              <p><strong style={{ fontSize: '1.8rem' }}>{pkg.price}</strong></p>
+              <p>{pkg.tagline}</p>
+              <ul>
+                {pkg.features.map((feature) => <li key={feature}>{feature}</li>)}
+              </ul>
+              <Link className="button button-primary" href="/contact">Get Started →</Link>
+            </article>
+          ))}
+        </div>
+        <p className="page-lead">
+          Distribution support may include platforms such as Barnes & Noble Press, Apple Books, Spotify/Findaway,
+          Lulu, and other appropriate retailers or distributors. Platform availability, eligibility, fees, and royalty
+          terms are controlled by each third-party provider and may change.
+        </p>
+      </section>
+
       <section>
         <h2 className="page-section-heading">Your book. Your rights. Your royalties.</h2>
         <p className="page-lead">
