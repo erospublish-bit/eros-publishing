@@ -98,6 +98,7 @@ export default function Storefront() {
         <nav className={`main-nav ${mobileMenu ? 'nav-open' : ''}`}>
           <a href="/books" onClick={() => setMobileMenu(false)}>Books</a>
           <a href="/books#formats" onClick={() => setMobileMenu(false)}>Book formats</a>
+          <a href="/blog" onClick={() => setMobileMenu(false)}>Blog</a>
           <a href="/author-services" onClick={() => setMobileMenu(false)}>For authors</a>
           <a href="/about" onClick={() => setMobileMenu(false)}>Our story</a>
         </nav>
@@ -175,7 +176,7 @@ export default function Storefront() {
         <section className="manifesto" id="about"><div className="manifesto-symbol">❧</div><div className="eyebrow"><span /> A NOTE FROM EROS</div><h2>Because every great story<br />begins with a <em>feeling.</em></h2><p>Named for the Greek god associated with love and desire, Eros Publishing celebrates the spark that makes us create, connect, and imagine something beyond ourselves.</p><a className="text-link" href="/about">Get to know us <ArrowRight size={15}/></a></section>
       </main>
 
-      <footer className="site-footer"><a href="#home" className="brand footer-brand"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></a><p>Stories that stir something eternal.</p><div className="footer-links"><a href="/books">Books</a><a href="/author-services">Author services</a><a href="/about">Our story</a><a href="/contact">Contact</a></div><small className="copyright">© {new Date().getFullYear()} Eros Publishing. All stories welcome.</small></footer>
+      <footer className="site-footer"><a href="#home" className="brand footer-brand"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></a><p>Stories that stir something eternal.</p><div className="footer-links"><a href="/books">Books</a><a href="/blog">Blog</a><a href="/author-services">Author services</a><a href="/about">Our story</a><a href="/contact">Contact</a></div><small className="copyright">© {new Date().getFullYear()} Eros Publishing. All stories welcome.</small></footer>
       
       {cartOpen && <div className="drawer-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setCartOpen(false); }}>
         <aside className="cart-drawer" aria-label="Shopping bag">
