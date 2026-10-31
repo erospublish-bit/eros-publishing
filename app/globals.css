@@ -55,3 +55,21 @@
 .contact-panel{max-width:720px;padding:clamp(24px,5vw,44px);border:1px solid var(--line);background:white}.contact-panel p{color:var(--muted);line-height:1.9}.contact-email{display:inline-flex;margin:8px 0 16px;color:var(--red);font-weight:700;overflow-wrap:anywhere}
 @media(max-width:760px){.page-nav{gap:12px;font-size:11px}.page-header-cta{display:none!important}.page-card-grid{grid-template-columns:1fr}.subpage-hero{padding-left:7%;padding-right:7%}}
 @media(max-width:520px){.page-nav{gap:10px;font-size:10px}.page-nav a:nth-child(3){display:none}.subpage-hero h1{letter-spacing:-1px}}
+
+
+/* Eros Journal / Blog page */
+.blog-article{max-width:820px;margin:0 auto;color:var(--ink)}
+.blog-article-meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:15px;border-bottom:1px solid var(--line);font-size:9px;letter-spacing:1.4px;color:#9a7b6e;font-weight:700}
+.blog-article>h2{font-family:var(--serif);font-size:clamp(32px,4.4vw,48px);line-height:1.15;font-weight:500;letter-spacing:-.8px;margin:28px 0 20px}
+.blog-article>h3{font-family:var(--serif);font-size:clamp(24px,3vw,31px);font-weight:500;margin:38px 0 12px;color:var(--red-dark)}
+.blog-article>p,.blog-article>ul{font-size:14px;line-height:2;color:#6f605c;margin:0 0 18px}
+.blog-article>p a{color:var(--red);font-weight:700;text-decoration:underline;text-decoration-color:#d9bcae;text-underline-offset:3px}
+.blog-article>ul{padding-left:23px}.blog-article>ul li{padding-left:5px;margin:8px 0}.blog-article>ul strong,.blog-article>p strong{color:var(--ink)}
+.blog-article .blog-article-intro{font-family:var(--serif);font-size:20px;line-height:1.75;color:#594746;margin-bottom:25px}
+.blog-article-cta{margin:45px 0 28px;padding:clamp(25px,5vw,45px);background:var(--red-dark);color:#fff4e8;text-align:center}
+.blog-cta-symbol{font-size:28px;color:#e3c48c}.blog-article-cta h3{font-family:var(--serif);font-size:clamp(27px,4vw,38px);font-weight:400;margin:12px 0;color:#fff4e8}
+.blog-article-cta p{max-width:580px;margin:0 auto;color:#e0c9c0;font-size:12px;line-height:1.9}
+.blog-cta-links{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.button-outline-light{border:1px solid #d9bda9;color:#f5e5d1;background:transparent}.button-outline-light:hover{background:#ffffff12}
+.blog-article>.blog-signoff{padding-top:18px;border-top:1px solid var(--line);font-family:var(--serif);font-size:16px;color:var(--red-dark);text-align:center}
+@media(max-width:520px){.blog-article>p,.blog-article>ul{font-size:13px}.blog-article .blog-article-intro{font-size:18px}.blog-article-meta{font-size:8px}}
