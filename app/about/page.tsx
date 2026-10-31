@@ -22,14 +22,14 @@ export default function AboutPage() {
       </section>
 
       <section className="book-detail-layout">
-        <div className="book-detail-cover-wrap">
+        <div className="book-detail-cover-wrap" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center' }}>
           <Image
-            className="book-detail-cover"
             src={beros}
             alt="Brandan Rayton, Founder and Publisher of Eros Publishing"
-            width={720}
-            height={900}
-            sizes="(max-width: 800px) 100vw, 42vw"
+            width={472}
+            height={1024}
+            sizes="(max-width: 800px) 92vw, 36vw"
+            style={{ width: '100%', maxWidth: '472px', height: 'auto', objectFit: 'contain' }}
           />
         </div>
         <div className="book-detail-copy">
