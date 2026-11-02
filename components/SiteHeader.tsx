@@ -21,6 +21,7 @@ export function SiteHeader({ homeHref = '/' }: SiteHeaderProps) {
       </Link>
       <nav className={`main-nav ${mobileMenu ? 'nav-open' : ''}`} aria-label="Primary navigation">
         <Link href="/books" onClick={closeMenu}>Books</Link>
+        <Link href="/portfolio" onClick={closeMenu}>Portfolio</Link>
         <Link href="/blog" onClick={closeMenu}>Blog</Link>
         <Link href="/author-services" onClick={closeMenu}>For authors</Link>
         <Link href="/publishing-pricing" onClick={closeMenu}>Pricing</Link>
