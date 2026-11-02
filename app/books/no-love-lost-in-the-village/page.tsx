@@ -7,7 +7,7 @@ import { books } from '@/lib/books';
 
 const book = books.find((item) => item.id === 'no-love-lost-in-the-village')!;
 const bookUrl = 'https://erospublishingkc.com/books/no-love-lost-in-the-village';
-const coverUrl = 'https://erospublishingkc.com/_next/static/media/no_love_lost_in_the_village_2400x2400-2.png';
+const coverUrl = 'https://erospublishingkc.com/_next/static/media/no-love-lost-in-the-village-web.webp';
 
 export const metadata: Metadata = {
   title: 'No Love Lost in the Village by B. Eros | Eros Publishing',
@@ -69,6 +69,8 @@ export default function NoLoveLostInTheVillagePage() {
             alt="Cover of No Love Lost in the Village by B. Eros"
             width={720}
             height={720}
+            sizes="(max-width: 800px) 92vw, 45vw"
+            quality={82}
             priority
           />
         </div>
