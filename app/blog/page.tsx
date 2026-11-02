@@ -1,54 +1,41 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { PageShell } from '@/components/PageShell';
+import { blogArticles } from '@/lib/blog';
 
 export const metadata: Metadata = {
-  title: 'More Than Books | Eros Publishing Blog',
-  description: 'Discover Eros Publishing, explore No Love Lost in the Village by B. Eros, and learn how self-publishing support can help bring your manuscript to life.',
+  title: 'Self-Publishing Guides & Author Resources | Eros Publishing',
+  description: 'Practical self-publishing guides covering publishing costs, book formatting, royalties, ISBNs, distribution, Lulu, Amazon KDP, and the path from manuscript to market.',
+  alternates: { canonical: 'https://erospublishingkc.com/blog' },
+  openGraph: { title: 'The Eros Journal | Self-Publishing Guides', description: 'Practical guidance for independent authors from manuscript to market.', url: 'https://erospublishingkc.com/blog', type: 'website' }
 };
 
 export default function BlogPage() {
-  return (
-    <PageShell
-      eyebrow="THE EROS JOURNAL"
-      title="More than books."
-      accent="A world of stories."
-      intro="Ideas, inspiration, featured reads, and guidance for the storytellers bringing their own worlds to life. Welcome to the Eros Publishing blog."
-    >
-      <article className="blog-article">
-        <div className="blog-article-meta"><span>WELCOME TO EROS PUBLISHING</span><span>READ · CREATE · BECOME</span></div>
-        <h2>More Than Books: Discover Eros Publishing, Where Stories Come to Life</h2>
-        <p className="blog-article-intro">Every memorable story begins with a spark. Sometimes it becomes a book that keeps you turning pages late into the night. Sometimes it becomes the manuscript you have been carrying around for years, waiting for the right moment to share it with the world.</p>
-
-        <p>At <strong>Eros Publishing</strong>, we celebrate both sides of that journey. We are an independent publishing brand for readers who love discovering stories and for aspiring authors who are ready to take the next step with their own work. Our purpose is simple: to make room for stories that move people, spark imagination, and stay with readers long after the final page.</p>
-
-        <h3>Stories worth getting lost in</h3>
-        <p>A great book offers more than an escape. It invites us into unfamiliar places, introduces us to complicated characters, and challenges what we think we know. The Eros bookshelf is a place to discover stories with atmosphere, emotion, suspense, and memorable turns.</p>
-        <p>One featured title is <em>No Love Lost in the Village</em> by B. Eros, a suspense novel set in the seemingly ordinary village of Northern Point. When Raz begins uncovering the truth behind Cleptes Corp. and the people working behind the scenes, buried secrets, betrayal, and questions of accountability threaten to disrupt the community. It is a story about power, greed, deception, and the price of bringing the truth into the open.</p>
-        <p>Whether you are drawn to suspense, layered characters, or stories that keep you guessing, we invite you to explore the <Link href="/books">Eros bookstore</Link> and find your next read.</p>
-
-        <h3>Your story deserves a path to publication</h3>
-        <p>Have a manuscript of your own? Taking a book from an early draft to a finished publication can feel overwhelming. There are creative decisions to make, publishing platforms to compare, formatting requirements to understand, and details to prepare before launch.</p>
-        <p>Eros Publishing is building author support around three important parts of that process:</p>
-        <ul>
-          <li><strong>Manuscript preparation:</strong> planning and preparation guidance to help move your work toward publication.</li>
-          <li><strong>Cover design and formatting:</strong> support planning a professional cover and readable interior files suited to your chosen publishing platform.</li>
-          <li><strong>Self-publishing guidance:</strong> help understanding formats, metadata, distribution options, and launch preparation.</li>
-        </ul>
-        <p>Every book and author has different needs. Project scope, deliverables, pricing, and timelines should be discussed and confirmed before work begins. Visit our <Link href="/author-services">author services page</Link> to learn more and start a conversation about your project.</p>
-
-        <h3>Independent publishing. Creative possibility.</h3>
-        <p>We believe independent publishing gives authors meaningful opportunities to shape their work and make informed choices about how it reaches readers. It is a journey built on creativity, persistence, and attention to detail. You bring the idea and the words; the right guidance can help you navigate the steps that follow.</p>
-        <p>And for readers, independent publishing means there are always new voices, perspectives, and worlds waiting to be discovered. Every book begins with someone willing to tell a story.</p>
-
-        <div className="blog-article-cta">
-          <span className="blog-cta-symbol">✦</span>
-          <h3>There is a story waiting for you.</h3>
-          <p>Explore the books, discover the author support available through Eros Publishing, or get in touch and tell us what you are creating.</p>
-          <div className="blog-cta-links"><Link className="button button-light" href="/books">Explore the bookstore →</Link><Link className="button button-outline-light" href="/author-services">For authors →</Link></div>
-        </div>
-        <p className="blog-signoff">Eros Publishing — <em>Stories that stir something eternal.</em></p>
+  const featured = blogArticles[0];
+  return <PageShell eyebrow="THE EROS JOURNAL" title="Publish with" accent="more clarity." intro="Practical guides for independent authors navigating editing, book production, distribution, royalties, and the business of bringing a manuscript to market.">
+    <section>
+      <div className="section-heading"><div><div className="eyebrow"><span /> START HERE</div><h2>Publishing guidance built for <em>real decisions.</em></h2><p>No hype or guaranteed outcomes—just useful explanations of the choices authors face while preparing and publishing a book.</p></div></div>
+      <article className="page-card">
+        <div className="card-icon">FEATURED · {featured.category.toUpperCase()}</div>
+        <h2>{featured.title}</h2><p className="page-lead">{featured.description}</p>
+        <Link className="button button-primary" href={`/blog/${featured.slug}`}>Read the guide <ArrowRight size={16}/></Link>
       </article>
-    </PageShell>
-  );
+    </section>
+
+    <section>
+      <div className="section-heading"><div><div className="eyebrow"><span /> AUTHOR RESOURCE LIBRARY</div><h2>Learn the path from <em>manuscript to market.</em></h2></div></div>
+      <div className="page-card-grid">{blogArticles.map((article) => <article className="page-card" key={article.slug}>
+        <div className="card-icon">{article.category.toUpperCase()}</div><h3>{article.title}</h3><p>{article.description}</p>
+        <p><small>{article.readTime}</small></p><Link className="text-link" href={`/blog/${article.slug}`}>Read article <ArrowRight size={15}/></Link>
+      </article>)}</div>
+    </section>
+
+    <section>
+      <div className="section-heading"><div><div className="eyebrow"><span /> EXPLORE BY TOPIC</div><h2>Answers for every stage of <em>independent publishing.</em></h2></div></div>
+      <div className="page-card-grid"><article className="page-card"><div className="card-icon">SELF-PUBLISHING</div><h3>Plan the publishing journey</h3><p>Understand costs, workflow, professional services, and the decisions involved in publishing independently.</p></article><article className="page-card"><div className="card-icon">BOOK PRODUCTION</div><h3>Prepare a professional book</h3><p>Learn how editing, formatting, covers, metadata, and proofs turn a manuscript into publication-ready files.</p></article><article className="page-card"><div className="card-icon">DISTRIBUTION & ROYALTIES</div><h3>Understand the marketplace</h3><p>Explore publishing platforms, identifiers, distribution choices, and the economics behind book sales.</p></article></div>
+    </section>
+
+    <section className="page-cta-panel"><h2>Reading about publishing is the first step. Publishing your book is the next.</h2><p>Tell Eros Publishing about your manuscript and receive a scope based on the support your project actually needs.</p><Link className="button button-light" href="/publishing-quote">Request a Publishing Quote <ArrowRight size={17}/></Link></section>
+  </PageShell>;
 }
