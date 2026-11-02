@@ -32,8 +32,8 @@ export default function PortfolioPage() {
         </div>
 
         <article className="book-detail-layout">
-          <div className="book-detail-cover-wrap">
-            <Image src={book.cover} alt={`Cover of ${book.title} by ${book.author}`} width={720} height={720} sizes="(max-width: 800px) 92vw, 38vw" style={{ width: '100%', height: 'auto' }} />
+          <div className="book-detail-cover-wrap" style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start' }}>
+            <Image src={book.cover} alt={`Cover of ${book.title} by ${book.author}`} width={360} height={360} sizes="(max-width: 800px) 46vw, 19vw" style={{ width: '50%', maxWidth: '360px', height: 'auto' }} />
           </div>
           <div className="book-detail-copy">
             <div className="card-icon">FLAGSHIP PROJECT</div>
