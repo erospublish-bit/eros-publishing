@@ -1,4 +1,4 @@
-import noLoveLostCover from '../images/no_love_lost_in_the_village_2400x2400-2.png';
+import noLoveLostCover from '../images/no-love-lost-in-the-village-web.webp';
 
 export type BookFormat = 'Ebook' | 'Paperback' | 'Hardcover' | 'Audiobook';
 export type Book = {
