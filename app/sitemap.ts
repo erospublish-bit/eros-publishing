@@ -4,6 +4,8 @@ import { books } from '@/lib/books';
 
 const baseUrl = 'https://erospublishingkc.com';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, changeFrequency: 'weekly', priority: 1 },
