@@ -4,52 +4,60 @@ import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xoeepyak';
+
 const services = [
   'Manuscript Evaluation','Proofreading','Copy Editing','Developmental Editing','Print Formatting','E-book Formatting','Cover Design','ISBN / Publishing Setup Guidance','Paperback Publishing','Hardcover Publishing','E-book Publishing','Audiobook Publishing','Retailer / Distribution Setup','Author Branding / Marketing Materials','Complete Publishing Package','I’m Not Sure — Recommend a Package'
 ];
-
 const platforms = ['Barnes & Noble','Apple Books','Spotify / Audiobooks','Lulu','Other Retailers','I’m Not Sure — I Need Guidance'];
 const formats = ['Paperback','Hardcover','E-book','Audiobook','Not Sure Yet'];
 
-export default function PublishingQuotePage() {
-  const [submitted, setSubmitted] = useState(false);
+type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+export default function PublishingQuotePage() {
+  const [submitState, setSubmitState] = useState<SubmitState>('idle');
+  const [submitError, setSubmitError] = useState('');
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = new FormData(form);
-    const subject = `Publishing Quote Request — ${data.get('title') || 'New project'}`;
-    const selected = (name: string) => data.getAll(name).join(', ') || 'Not selected';
-    const body = [
-      'NEW PUBLISHING QUOTE REQUEST',
-      '',
-      `Name: ${data.get('name')}`,
-      `Email: ${data.get('email')}`,
-      `Phone: ${data.get('phone') || 'Not provided'}`,
-      `Preferred contact: ${data.get('contactMethod')}`,
-      `Consultation preference: ${data.get('consultation')}`,
-      '',
-      `Book title: ${data.get('title')}`,
-      `Genre: ${data.get('genre')}`,
-      `Word count: ${data.get('wordCount')}`,
-      `Manuscript stage: ${data.get('stage')}`,
-      `Previously published: ${data.get('previouslyPublished')}`,
-      `Book description: ${data.get('description')}`,
-      '',
-      `Services: ${selected('services')}`,
-      `Distribution: ${selected('platforms')}`,
-      `Formats: ${selected('formats')}`,
-      '',
-      `Ideal publication date: ${data.get('launchDate') || 'Not provided'}`,
-      `Budget: ${data.get('budget')}`,
-      `Primary goal: ${data.get('primaryGoal')}`,
-      `Goals / priorities: ${data.get('goals') || 'Not provided'}`,
-      `Biggest question / concern: ${data.get('concern') || 'Not provided'}`,
-      `Referral source: ${data.get('source') || 'Not provided'}`,
-    ].join('\n');
 
-    setSubmitted(true);
-    window.location.href = `mailto:authors@erospublishingkc.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSubmitState('submitting');
+    setSubmitError('');
+
+    // Helpful Formspree metadata. The endpoint itself is public by design; no secret is exposed here.
+    data.set('_subject', `Publishing Quote Request — ${data.get('title') || 'New project'}`);
+    data.set('inquiryType', 'Publishing Quote Request');
+    data.set('submittedFrom', 'Eros Publishing — Publishing Quote');
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!response.ok) {
+        let message = 'We could not submit your request. Please check your information and try again.';
+        try {
+          const result = await response.json();
+          if (Array.isArray(result?.errors) && result.errors.length > 0) {
+            message = result.errors.map((error: { message?: string }) => error.message).filter(Boolean).join(' ') || message;
+          }
+        } catch {
+          // Keep the friendly fallback message when Formspree does not return JSON.
+        }
+        throw new Error(message);
+      }
+
+      form.reset();
+      setSubmitState('success');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      setSubmitState('error');
+      setSubmitError(error instanceof Error ? error.message : 'We could not submit your request. Please try again.');
+    }
   }
 
   return (
@@ -65,14 +73,25 @@ export default function PublishingQuotePage() {
         <p style={{ marginTop: 24 }}><Link className="text-link" href="/publishing-pricing">Review publishing services & pricing →</Link></p>
       </section>
 
-      {submitted && (
-        <section className="quote-success" role="status">
-          <strong>Your publishing request has been prepared.</strong>
-          <p>Your email app should open with your project details already organized. Review the message and send it to complete your inquiry. If your email app did not open, contact <strong>authors@erospublishingkc.com</strong> and include your book title and the services you are considering.</p>
+      {submitState === 'success' && (
+        <section className="quote-success" role="status" aria-live="polite">
+          <strong>Your publishing inquiry has been submitted successfully.</strong>
+          <p>Thank you for telling us about your book. Eros Publishing has received your project information and will review your goals, requested services, formats, and timeline before following up using your preferred contact method.</p>
+          <p><strong>You do not need to send a separate email.</strong></p>
         </section>
       )}
 
-      <form className="quote-form" onSubmit={handleSubmit}>
+      {submitState === 'error' && (
+        <section className="quote-success" role="alert" aria-live="assertive">
+          <strong>We were unable to submit your inquiry.</strong>
+          <p>{submitError}</p>
+          <p>Your entries are still on this page. Please try again. If the problem continues, email <strong>authors@erospublishingkc.com</strong>.</p>
+        </section>
+      )}
+
+      <form className="quote-form" action={FORMSPREE_ENDPOINT} method="POST" onSubmit={handleSubmit}>
+        <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }} />
+
         <section className="quote-section">
           <div className="quote-section-heading"><span>01</span><div><h2>About You</h2><p>Tell us how you prefer to communicate during the planning stage.</p></div></div>
           <div className="quote-grid">
@@ -123,13 +142,15 @@ export default function PublishingQuotePage() {
         </section>
 
         <section className="quote-section quote-consent">
-          <div className="quote-section-heading"><span>06</span><div><h2>Review & Send</h2><p>Submitting an inquiry starts a conversation—it does not lock you into a publishing package.</p></div></div>
-          <label><input type="checkbox" required /> <span>I confirm that I own or have the necessary rights to the material described in this request.</span></label>
-          <label><input type="checkbox" required /> <span>I understand that submitting this form is a request for information and does not create a publishing agreement or guarantee publication, distribution, sales, or earnings.</span></label>
-          <label><input type="checkbox" required /> <span>I agree that Eros Publishing may contact me regarding this publishing inquiry.</span></label>
+          <div className="quote-section-heading"><span>06</span><div><h2>Review & Submit</h2><p>Submitting an inquiry starts a conversation—it does not lock you into a publishing package.</p></div></div>
+          <label><input type="checkbox" name="rightsConfirmed" value="Yes" required /> <span>I confirm that I own or have the necessary rights to the material described in this request.</span></label>
+          <label><input type="checkbox" name="inquiryAcknowledged" value="Yes" required /> <span>I understand that submitting this form is a request for information and does not create a publishing agreement or guarantee publication, distribution, sales, or earnings.</span></label>
+          <label><input type="checkbox" name="contactConsent" value="Yes" required /> <span>I agree that Eros Publishing may contact me regarding this publishing inquiry.</span></label>
           <p><strong>Please do not submit confidential material or your complete unpublished manuscript through this form.</strong> If manuscript pages are needed for evaluation, we can discuss the appropriate next step after reviewing your inquiry.</p>
-          <button className="button button-primary quote-submit" type="submit">Prepare My Publishing Request →</button>
-          <p style={{ marginTop: 14, fontSize: 12 }}>Your email application will open with the information above organized into a message to Eros Publishing. You can review it before sending.</p>
+          <button className="button button-primary quote-submit" type="submit" disabled={submitState === 'submitting'} aria-busy={submitState === 'submitting'}>
+            {submitState === 'submitting' ? 'Submitting Your Request…' : 'Submit My Publishing Request →'}
+          </button>
+          <p style={{ marginTop: 14, fontSize: 12 }}>Your inquiry is submitted securely through our website. You will remain on this page and receive confirmation when it has been sent.</p>
         </section>
       </form>
 
