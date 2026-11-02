@@ -1,14 +1,13 @@
 /** @jsxRuntime automatic */
 'use client';
 
-import { createElement, useEffect, useMemo, useState, type ChangeEvent, type MouseEvent } from 'react';
+import { createElement, useEffect, useMemo, useState, type ChangeEvent } from 'react';
 import Image from 'next/image';
-import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Menu, Minus, Plus, ShoppingBag, Sparkles, X } from 'lucide-react';
+import { ArrowRight, BookOpen, ChevronDown, Headphones, Heart, Sparkles } from 'lucide-react';
+import { SiteHeader } from '@/components/SiteHeader';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
 const LULU_BOOK_ID = 'no-love-lost-in-the-village';
-
-type CartLine = { book: Book; format: BookFormat; quantity: number };
 
 const money = (value: number): string => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
 
@@ -21,12 +20,8 @@ function CoverArt({ book, large = false }: { book: Book; large?: boolean }) {
 }
 
 export default function Storefront() {
-  const [cart, setCart] = useState<CartLine[]>([]);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [mobileMenu, setMobileMenu] = useState(false);
   const [query, setQuery] = useState('');
   const [format, setFormat] = useState<Record<string, BookFormat>>({});
-  const [notice, setNotice] = useState('');
   const [luluReady, setLuluReady] = useState(false);
 
   useEffect(() => {
@@ -39,36 +34,13 @@ export default function Storefront() {
   }, []);
 
   const filteredBooks: Book[] = useMemo(() => books.filter((book: Book) => `${book.title} ${book.author} ${book.genre}`.toLowerCase().includes(query.toLowerCase())), [query]);
-  const count = cart.reduce((sum, line) => sum + line.quantity, 0);
-  const subtotal = cart.reduce((sum, line) => sum + line.book.price * line.quantity, 0);
   const luluBook = books.find((book) => book.id === LULU_BOOK_ID);
-
-  function addToCart(book: Book) {
-    const chosen = format[book.id] ?? book.formats[0];
-    setCart((current) => {
-      const existing = current.find((line) => line.book.id === book.id && line.format === chosen);
-      if (existing) return current.map((line) => line === existing ? { ...line, quantity: line.quantity + 1 } : line);
-      return [...current, { book, format: chosen, quantity: 1 }];
-    });
-    setNotice(`${book.title} added to your bag.`);
-    setCartOpen(true);
-  }
-
-  function changeQuantity(bookId: string, chosenFormat: BookFormat, delta: number): void {
-    setCart((current: CartLine[]) => current.map((line: CartLine) => line.book.id === bookId && line.format === chosenFormat ? { ...line, quantity: line.quantity + delta } : line).filter((line: CartLine) => line.quantity > 0));
-  }
-
-  const handleDrawerBackdropMouseDown = (event: MouseEvent<HTMLDivElement>): void => { if (event.target === event.currentTarget) setCartOpen(false); };
   const handleBookSearch = (event: ChangeEvent<HTMLInputElement>): void => setQuery(event.target.value);
 
   return (
     <>
       <div className="announcement"><Sparkles size={14} /> STORIES WITH A LITTLE DIVINE FIRE <span className="announcement-dot">✦</span> INDEPENDENTLY PUBLISHED, FOREVER REMEMBERED</div>
-      <header className="site-header">
-        <a href="#home" className="brand" aria-label="Eros Publishing home"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></a>
-        <nav className={`main-nav ${mobileMenu ? 'nav-open' : ''}`}><a href="/books" onClick={() => setMobileMenu(false)}>Books</a><a href="/books#formats" onClick={() => setMobileMenu(false)}>Book formats</a><a href="/blog" onClick={() => setMobileMenu(false)}>Blog</a><a href="/author-services" onClick={() => setMobileMenu(false)}>For authors</a><a href="/about" onClick={() => setMobileMenu(false)}>Our story</a></nav>
-        <div className="header-actions"><a className="button button-primary" href="/publishing-quote">Request a Quote</a><button className="icon-button bag-button" onClick={() => setCartOpen(true)} aria-label={`Open shopping bag, ${count} items`}><ShoppingBag size={19} /><span>Bag</span><b>{count}</b></button><button className="icon-button mobile-menu-button" onClick={() => setMobileMenu(!mobileMenu)} aria-label="Toggle navigation">{mobileMenu ? <X /> : <Menu />}</button></div>
-      </header>
+      <SiteHeader homeHref="#home" />
 
       <main>
         <section className="hero" id="home"><div className="hero-glow" /><div className="hero-copy"><div className="eyebrow"><span /> THE HOME OF STORIES THAT STAY WITH YOU</div><h1>Fall in love<br />with <em>the story.</em></h1><p>Discover books that move you—or bring your own manuscript to life with professional editing, design, formatting, and publishing support.</p><div className="hero-actions"><a className="button button-primary" href="#books">Explore Our Books <ArrowRight size={17} /></a><a className="text-link" href="/publishing-quote">Publish With Eros <ArrowRight size={15} /></a></div><div className="hero-proof"><span className="proof-icon"><Heart size={15} /></span><span>For readers, dreamers, and authors ready to publish.</span></div></div><div className="hero-art" aria-label="Decorative mythology-inspired illustration"><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="sun-disc"><span>✦</span></div><div className="hero-statue"><span className="statue-wings">⌁</span><span className="statue-head" /><span className="statue-body" /><span className="statue-cloth" /><span className="statue-base" /></div><div className="hero-caption"><span>✦</span><div><b>Inspired by Eros</b><small>Love, desire & the art of creation</small></div></div><span className="hero-star star-a">✧</span><span className="hero-star star-b">✦</span><span className="hero-star star-c">✧</span></div><div className="hero-bottom"><span>01 / DISCOVER</span><span className="hero-bottom-line"/><span>READ. CREATE. BECOME.</span></div></section>
@@ -93,8 +65,6 @@ export default function Storefront() {
       </main>
 
       <footer className="site-footer"><a href="#home" className="brand footer-brand"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></a><p>Stories that stir something eternal.</p><div className="footer-links"><a href="/books">Books</a><a href="/blog">Blog</a><a href="/author-services">Author services</a><a href="/publishing-pricing">Pricing</a><a href="/publishing-quote">Request a Quote</a><a href="/about">Our story</a><a href="/contact">Contact</a></div><small className="copyright">© {new Date().getFullYear()} Eros Publishing. Independent publishing services based in Kansas City, serving authors nationwide.</small></footer>
-
-      {cartOpen && <div className="drawer-backdrop" onMouseDown={handleDrawerBackdropMouseDown}><aside className="cart-drawer" aria-label="Shopping bag"><div className="drawer-header"><div><span className="eyebrow"><span /> YOUR COLLECTION</span><h2>Your bag <em>({count})</em></h2></div><button className="icon-button" onClick={() => setCartOpen(false)} aria-label="Close shopping bag"><X /></button></div>{notice && <p className="cart-notice">{notice}</p>}{cart.length === 0 ? <div className="cart-empty"><ShoppingBag size={35}/><h3>Your next favorite is waiting.</h3><p>Add a book to begin your collection.</p><button className="button button-primary" onClick={() => { setCartOpen(false); document.getElementById('books')?.scrollIntoView({ behavior: 'smooth' }); }}>Explore books <ArrowRight size={16}/></button></div> : <><div className="cart-lines">{cart.map((line) => <div className="cart-line" key={`${line.book.id}-${line.format}`}><CoverArt book={line.book}/><div className="cart-line-details"><b>{line.book.title}</b><small>{line.format} · {line.book.author}</small><strong>{money(line.book.price * line.quantity)}</strong><div className="quantity-control"><button onClick={() => changeQuantity(line.book.id, line.format, -1)} aria-label="Decrease quantity"><Minus size={13}/></button><span>{line.quantity}</span><button onClick={() => changeQuantity(line.book.id, line.format, 1)} aria-label="Increase quantity"><Plus size={13}/></button></div></div><button className="remove-line" onClick={() => changeQuantity(line.book.id, line.format, -line.quantity)} aria-label={`Remove ${line.book.title}`}><X size={15}/></button></div>)}</div><div className="cart-summary"><div><span>Subtotal</span><strong>{money(subtotal)}</strong></div><p>Shipping and taxes, if applicable, are calculated at checkout.</p><button className="button button-primary checkout-button" onClick={() => setNotice('Direct checkout is available through each book’s listed retail and distribution partners.')}>View purchase options <ArrowRight size={16}/></button></div></>}</aside></div>}
     </>
   );
 }
