@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SiteHeader } from '@/components/SiteHeader';
 
 type PageShellProps = { eyebrow: string; title: string; accent: string; intro: string; children: React.ReactNode };
 
@@ -6,11 +7,7 @@ export function PageShell({ eyebrow, title, accent, intro, children }: PageShell
   return (
     <>
       <div className="announcement">✦ STORIES WITH A LITTLE DIVINE FIRE <span className="announcement-dot">✦</span> INDEPENDENTLY PUBLISHED, FOREVER REMEMBERED</div>
-      <header className="site-header">
-        <Link href="/" className="brand" aria-label="Eros Publishing home"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></Link>
-        <nav className="main-nav page-nav"><Link href="/books">Books</Link><Link href="/blog">Blog</Link><Link href="/author-services">For authors</Link><Link href="/publishing-pricing">Pricing</Link><Link href="/about">Our story</Link><Link href="/contact">Contact</Link></nav>
-        <Link className="button button-primary page-header-cta quote-header-cta" href="/publishing-quote">Request a Quote <span aria-hidden="true">→</span></Link>
-      </header>
+      <SiteHeader />
       <main className="subpage-main">
         <section className="subpage-hero">
           <div className="eyebrow"><span /> {eyebrow}</div>
