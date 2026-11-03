@@ -33,7 +33,7 @@ export default function CaseStudyPage() {
           <h2 className="page-section-heading">From story to <em>published title.</em></h2>
           <p className="page-lead"><em>No Love Lost in the Village</em> is a suspense novel by B. Eros centered on corruption, betrayal, accountability, and the cost of exposing the truth.</p>
           <p>The project required more than simply uploading a manuscript. The book moved through story development and editorial revision, presentation and cover work, publication preparation, format decisions, and distribution setup.</p>
-          <p><strong>Author:</strong> B. Eros<br/><strong>Genre:</strong> Suspense / Crime Fiction<br/><strong>Publishing model:</strong> Independent publishing<br/><strong>Formats:</strong> Print, e-book and audiobook distribution</p>
+          <p><strong>Author:</strong> B. Eros<br/><strong>Genre:</strong> Suspense / Crime Fiction<br/><strong>Publishing model:</strong> Independent publishing<br/><strong>Formats:</strong> Paperback, hardcover, e-book and audiobook distribution</p>
           <Link className="text-link" href="/books/no-love-lost-in-the-village">Explore the finished book <ArrowRight size={15}/></Link>
         </div>
       </section>
