@@ -22,3 +22,18 @@
 .book-edition-card lulu-buy-button{display:block;max-width:100%;overflow:hidden}
 .book-purchase-note{margin:24px 0 0;font-size:12px;color:var(--muted);line-height:1.7}
 @media(max-width:680px){.book-shop-feature,.book-shop-formats,.book-edition-grid{grid-template-columns:1fr}.book-shop-feature{padding:20px}.book-shop-cover{max-width:240px;margin:auto}}
+
+/* Quick publishing inquiry: short form first, optional detailed questionnaire */
+.quick-quote-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,1fr);gap:32px;align-items:start}
+.quick-quote-layout>.quick-quote-aside{background:#f4e8df;border:1px solid var(--line);padding:30px}
+.quick-quote-aside h2{font-family:var(--serif);font-size:30px;font-weight:500;margin:12px 0 20px}
+.quick-quote-aside ol{padding-left:22px;display:grid;gap:15px}
+.quick-quote-aside li{line-height:1.6}
+.quick-quote-aside li::marker{color:var(--red);font-weight:700}
+.quick-quote-aside li p,.quick-quote-detailed p{color:var(--muted);line-height:1.8;margin:4px 0 0}
+.quick-quote-detailed{margin:28px 0;padding:22px;background:#fffdf9;border:1px solid var(--line)}
+.quick-quote-detailed h3{font-family:var(--serif);font-weight:500;font-size:21px;margin:0 0 10px}
+.quick-quote-detailed .button{margin-top:16px;text-align:center}
+.quick-quote-consent{margin-top:24px}
+.quick-quote-consent a{text-decoration:underline;color:var(--red)}
+@media(max-width:850px){.quick-quote-layout{grid-template-columns:1fr}}
