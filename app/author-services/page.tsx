@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Self-Publishing Services for Authors | Eros Publishing',
   description:
     'Professional manuscript preparation, cover and interior design, self-publishing guidance, and answers to common author publishing questions from Eros Publishing.',
+  alternates: { canonical: '/author-services' },
 };
 
 const services = [
