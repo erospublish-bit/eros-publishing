@@ -16,7 +16,7 @@ export default function LegalPage() {
       intro="Clear expectations protect authors, readers, and the creative work entrusted to Eros Publishing. Review the policies that govern use of our website and publishing-service relationships."
     >
       <section>
-        <p className="page-lead"><strong>Last updated: October 31, 2026.</strong> These website policies provide general terms for Eros Publishing. Individual publishing projects may also be governed by a separate written service agreement, proposal, or statement of work. If a signed agreement conflicts with these general service policies, the signed agreement controls for that project.</p>
+        <p className="page-lead"><strong>Last updated: November 3, 2026.</strong> These website policies provide general terms for Eros Publishing. Individual publishing projects may also be governed by a separate written service agreement, proposal, or statement of work. If a signed agreement conflicts with these general service policies, the signed agreement controls for that project.</p>
 
         <div className="page-card-grid">
           <article className="page-card"><div className="card-icon">01</div><h3>Privacy</h3><p>How information submitted through this website may be collected, used, and protected.</p></article>
@@ -53,10 +53,25 @@ export default function LegalPage() {
         </ul>
       </section>
 
+      <section id="service-scope">
+        <h2 className="page-section-heading">Detailed Publishing Service Terms</h2>
+        <p>Before paid work begins, the author and Eros Publishing should approve a written proposal or statement of work identifying services, manuscript word count and version, deliverable files, formats, distribution platforms, revision allowances, payment milestones, estimated schedule, and third-party costs. Website package descriptions are summaries; the signed agreement defines the actual scope.</p>
+        <ul className="page-list">
+          <li><strong>Editing.</strong> The agreement specifies the editing level and whether the deliverable is an editorial report, marked-up manuscript, or clean copy. Rewrites, new chapters, and later manuscript versions are not included unless specifically listed.</li>
+          <li><strong>Design and formatting.</strong> The agreement identifies cover concepts, supported editions, print specifications, export file types, and revision allowances. Custom illustration, licensed imagery, additional editions, and editable source files require explicit inclusion.</li>
+          <li><strong>Distribution.</strong> Each platform and edition to be configured must be listed. Retailer approval, account verification, printing, shipping, and platform policies are outside Eros Publishing's control.</li>
+          <li><strong>Revisions.</strong> A revision round is one consolidated set of client feedback on a deliverable. New direction, new content, or changes beyond the approved scope may require a written change order. Additional charges must be approved before work begins.</li>
+          <li><strong>Client responsibilities.</strong> Authors provide accurate manuscript files, rights-cleared materials, timely feedback, and approvals. Delays in required materials or decisions can change the schedule.</li>
+          <li><strong>Final delivery.</strong> The proposal states the final file types, delivery method, and required proof or publication approval. Rights to commissioned artwork, stock assets, fonts, templates, and working files are governed by the agreement and applicable licenses.</li>
+          <li><strong>Payments.</strong> The pricing page describes a standard 50% start payment and 50% balance before final delivery or publication. The individual agreement confirms actual amounts, milestones, and any different arrangement.</li>
+          <li><strong>Author ownership and royalties.</strong> Authors retain their original manuscript rights. When retailer accounts are held in the author's name, royalties are governed by the platform's terms. Any additional Eros Publishing fees must be disclosed in the agreement.</li>
+        </ul>
+      </section>
+
       <section id="refunds">
         <h2 className="page-section-heading">Refund & Cancellation Policy</h2>
         <p>Because publishing services involve reserved production time and customized creative or professional work, cancellation and refund eligibility depends on the work already performed and the terms of the applicable service agreement. Any non-refundable deposit, milestone payment, cancellation charge, or refund calculation should be identified before the project begins.</p>
-        <p>If a client requests cancellation, Eros Publishing may invoice for completed work, approved expenses, and other amounts due under the project agreement. Any eligible refund will be determined according to that agreement. Purchases made through third-party retailers or marketplaces are governed by the seller's applicable return and refund policy.</p>
+        <p>If a client requests cancellation, Eros Publishing may invoice for completed work, approved expenses, and other amounts due under the project agreement. Any eligible refund will be determined according to that agreement and applicable law. Clients should request cancellation in writing and receive an itemized accounting of completed work, approved third-party expenses, payments, and any refund or balance. Purchases made through third-party retailers or marketplaces are governed by the seller's applicable return and refund policy.</p>
       </section>
 
       <section id="copyright">
