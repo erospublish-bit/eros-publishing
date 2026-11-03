@@ -246,6 +246,8 @@ export default function AuthorServicesPage() {
         </div>
       </section>
 
+      <section><h2 className="page-section-heading">Know your rights before you begin</h2><p>Our author agreement explains manuscript ownership, included deliverables, revision limits, payment milestones, cancellation, and the written approval required before publishing.</p><Link className="text-link" href="/author-agreements">Review author agreements and approval documents →</Link></section>
+
       <section className="page-cta-panel">
         <h2>Still have a question about your book?</h2>
         <p>
