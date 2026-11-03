@@ -115,14 +115,14 @@ export default function PublishingQuotePage() {
           <ol>
             <li><strong>Tell us about your project.</strong><p>Complete the short form with what you know today.</p></li>
             <li><strong>We review your inquiry.</strong><p>We'll follow up to clarify your needs and recommend a sensible next step.</p></li>
-            <li><strong>Get a clear proposal.</strong><p>For projects moving forward, we'll outline scope, deliverables, timing, and pricing before any paid work begins.</p></li>
+            <li><strong>Get a clear proposal.</strong><p>For projects moving forward, we'll outline scope, deliverables, revision allowances, timing, pricing, and a written agreement before any paid work begins.</p></li>
           </ol>
           <div className="quick-quote-detailed">
             <h3>Already have your project details ready?</h3>
             <p>Use our comprehensive questionnaire to share manuscript length, publishing formats, distribution preferences, budget, and launch goals upfront.</p>
             <Link className="button book-secondary-button" href="/publishing-quote/detailed">Complete Detailed Quote Form →</Link>
           </div>
-          <Link className="text-link" href="/publishing-pricing">Explore publishing packages & pricing →</Link>
+          <Link className="text-link" href="/publishing-pricing">Explore publishing packages & pricing →</Link><p><Link className="text-link" href="/legal#service-scope">Review service terms & author rights →</Link></p>
         </aside>
       </section>
     </PageShell>
