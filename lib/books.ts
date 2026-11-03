@@ -26,7 +26,7 @@ export const books: Book[] = [
     id: 'no-love-lost-in-the-village',
     title: 'No Love Lost in the Village',
     author: 'B. Eros',
-    genre: 'Crime',
+    genre: 'Suspense / Crime Fiction',
     description:
       "In the seemingly ordinary village of Northern Point, corruption, betrayal, and deception run deeper than anyone wants to admit. When Raz begins uncovering the truth behind Cleptes Corp. and the people pulling the strings, buried secrets, stolen credit, and questionable loyalties threaten to bring the entire village crashing down. Armed with evidence, determination, and a refusal to take the fall for someone else's deception, Raz discovers that the closer you get to the truth, the harder it becomes to know who you can trust. No Love Lost in the Village is a dark, sharp-witted suspense novel about power, accountability, greed, and the dangerous price of exposing the truth.",
     price: 14.99,
@@ -38,7 +38,7 @@ export const books: Book[] = [
     audiobookUrl:
       'https://open.spotify.com/show/5SOdZRxwlPaaIaHKHXjB6c?si=rQ-F78cWTyeHqNsdUPtBNw&utm_source=copy-link',
     ebookLinks: [
-      { label: 'Apple Books', url: 'http://books.apple.com/us/book/id6822292321' },
+      { label: 'Apple Books', url: 'https://books.apple.com/us/book/id6822292321' },
       {
         label: 'Barnes & Noble',
         url: 'https://www.barnesandnoble.com/w/no-love-lost-in-the-village-b-eros/1151674194?ean=2940185495438',
