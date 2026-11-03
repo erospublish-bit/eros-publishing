@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xoeepyak';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maeeaepa';
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 
 export default function PublishingQuotePage() {
