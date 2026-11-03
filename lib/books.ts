@@ -13,6 +13,8 @@ export type Book = {
   featured?: boolean;
   /** Lulu Buy Button ID for books sold through Lulu. */
   luluBuyButtonId?: string;
+  /** Separate Lulu Buy Button ID for a hardcover edition. */
+  hardcoverLuluBuyButtonId?: string;
   audiobookUrl?: string;
   ebookLinks?: { label: string; url: string }[];
   /** Lulu widget presentation variant. */
@@ -28,10 +30,11 @@ export const books: Book[] = [
     description:
       "In the seemingly ordinary village of Northern Point, corruption, betrayal, and deception run deeper than anyone wants to admit. When Raz begins uncovering the truth behind Cleptes Corp. and the people pulling the strings, buried secrets, stolen credit, and questionable loyalties threaten to bring the entire village crashing down. Armed with evidence, determination, and a refusal to take the fall for someone else's deception, Raz discovers that the closer you get to the truth, the harder it becomes to know who you can trust. No Love Lost in the Village is a dark, sharp-witted suspense novel about power, accountability, greed, and the dangerous price of exposing the truth.",
     price: 14.99,
-    formats: ['Paperback'],
+    formats: ['Paperback', 'Hardcover'],
     cover: noLoveLostCover.src,
     featured: true,
     luluBuyButtonId: '4b7dbcee-c35c-4ead-9c0a-63ec364c0b9a',
+    hardcoverLuluBuyButtonId: '5b8cbbbb-946a-4ecb-b63f-64bfc22cada3',
     audiobookUrl:
       'https://open.spotify.com/show/5SOdZRxwlPaaIaHKHXjB6c?si=rQ-F78cWTyeHqNsdUPtBNw&utm_source=copy-link',
     ebookLinks: [
