@@ -5,6 +5,7 @@ import { PageShell } from '@/components/PageShell';
 export const metadata: Metadata = {
   title: 'Publishing Services & Pricing | Eros Publishing',
   description: 'Explore transparent self-publishing service pricing from Eros Publishing, including editing, formatting, cover design, distribution setup, and complete publishing packages.',
+  alternates: { canonical: '/publishing-pricing' },
 };
 
 const individualServices = [['Publishing Consultation','$75'],['Manuscript Evaluation','$149–$299'],['Proofreading','$0.015/word'],['Copy Editing','$0.025/word'],['Developmental Editing','$0.04/word'],['E-book Formatting','$149'],['Print Interior Formatting','$199'],['E-book + Print Formatting','$299'],['Standard Cover Design','$249'],['Premium Custom Cover','$399+'],['ISBN / Publishing Setup Assistance','$99'],['Single Distribution Platform Setup','$199'],['Distribution Setup — Up to 4 Platforms','$399'],['Additional Distribution Platform','$75'],['Additional Book Setup','$199+'],['Book Description / Sales Copy','$99'],['Metadata, Categories & Keywords','$99'],['Author Bio Development','$75'],['Launch Consultation','$149'],['30-Day Publishing Support','$199']];
