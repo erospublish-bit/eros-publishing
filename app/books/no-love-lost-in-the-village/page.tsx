@@ -7,7 +7,7 @@ import { books } from '@/lib/books';
 
 const book = books.find((item) => item.id === 'no-love-lost-in-the-village')!;
 const bookUrl = 'https://erospublishingkc.com/books/no-love-lost-in-the-village';
-const coverUrl = 'https://erospublishingkc.com/images/no-love-lost-in-the-village-web.webp';
+const coverUrl = new URL(book.cover, 'https://erospublishingkc.com').toString();
 
 export const metadata: Metadata = {
   title: 'No Love Lost in the Village by B. Eros | Eros Publishing',
@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   alternates: {
     canonical: bookUrl,
   },
+  openGraph: { type: 'book', title: 'No Love Lost in the Village by B. Eros', description: 'A suspense novel about corruption and betrayal in Northern Point.', url: bookUrl, images: [{ url: coverUrl, alt: 'Cover of No Love Lost in the Village' }] },
+  twitter: { card: 'summary_large_image', images: [coverUrl] },
 };
 
 const bookStructuredData = {
