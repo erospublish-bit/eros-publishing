@@ -38,14 +38,10 @@ const bookStructuredData = {
   },
   genre: ['Crime', 'Suspense fiction'],
   inLanguage: 'en-US',
-  bookFormat: 'https://schema.org/Paperback',
-  offers: {
-    '@type': 'Offer',
-    url: bookUrl,
-    price: book.price.toFixed(2),
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
-  },
+  workExample: [
+    { '@type': 'Book', name: `${book.title} — Paperback`, bookFormat: 'https://schema.org/Paperback' },
+    { '@type': 'Book', name: `${book.title} — Hardcover`, bookFormat: 'https://schema.org/Hardcover' },
+  ],
 };
 
 export default function NoLoveLostInTheVillagePage() {
@@ -104,19 +100,27 @@ export default function NoLoveLostInTheVillagePage() {
       <section>
         <h2 className="page-section-heading">Choose your edition</h2>
         <p className="page-lead">Read it in print or e-book format, or experience the story as an audiobook.</p>
+        {(book.luluBuyButtonId || book.hardcoverLuluBuyButtonId) && <Script src="https://js.lulu.com/lulu-buy.js" strategy="afterInteractive" />}
         <div className="page-card-grid">
           <article className="page-card">
-            <div className="card-icon">PRINT</div>
+            <div className="card-icon">PRINT · PAPERBACK</div>
             <h3>Paperback</h3>
-            <p>Order the physical edition through our Lulu-powered purchase experience.</p>
+            <p>Order the paperback through Lulu.</p>
             {book.luluBuyButtonId && (
-              <>
-                <Script src="https://js.lulu.com/lulu-buy.js" strategy="afterInteractive" />
-                {/* @ts-expect-error Lulu defines this custom element in its external script. */}
-                <lulu-buy-button buy-button-id={book.luluBuyButtonId} variant={book.luluVariant || 'product-showcase'} />
-              </>
+              // @ts-expect-error Lulu defines this custom element in its external script.
+              <lulu-buy-button buy-button-id={book.luluBuyButtonId} variant={book.luluVariant || 'product-showcase'} />
             )}
           </article>
+
+          {book.hardcoverLuluBuyButtonId && (
+            <article className="page-card">
+              <div className="card-icon">PRINT · HARDCOVER</div>
+              <h3>Hardcover</h3>
+              <p>Order the hardcover edition through Lulu.</p>
+              {/* @ts-expect-error Lulu defines this custom element in its external script. */}
+              <lulu-buy-button buy-button-id={book.hardcoverLuluBuyButtonId} variant={book.luluVariant || 'product-showcase'} />
+            </article>
+          )}
 
           <article className="page-card">
             <div className="card-icon">DIGITAL</div>
