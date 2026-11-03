@@ -85,6 +85,8 @@ export default function LegalPage() {
         <p>Information on this website is not legal, tax, accounting, or financial advice. Authors and clients should obtain advice from qualified professionals when their project raises legal, tax, business-formation, rights, licensing, or other professional questions.</p>
       </section>
 
+      <section><h2 className="page-section-heading">Project agreements & author approvals</h2><p>For a client-ready breakdown of manuscript rights, service scope, payments, change orders, confidentiality, and final publication authorization, review our author agreement documents. These are reference templates; any binding project agreement must be completed and accepted separately.</p><Link className="text-link" href="/author-agreements">Review author agreement documents →</Link></section>
+
       <section className="page-cta-panel">
         <h2>Questions about these policies?</h2>
         <p>Contact Eros Publishing before purchasing services if you need clarification about project terms, rights, payments, revisions, or cancellation.</p>
