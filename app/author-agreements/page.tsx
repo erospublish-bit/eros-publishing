@@ -26,8 +26,10 @@ const sections = [
 export default function AuthorAgreementsPage() {
   return (
     <PageShell eyebrow="FOR AUTHOR CLIENTS" title="Clear terms for" accent="your book." intro="Review the documents used to define publishing work, safeguard author ownership, and confirm publication decisions before a project moves forward.">
-      <section>\n        <p className="page-lead"><strong>Review templates — not an executed contract.</strong> These example provisions help you understand our process. A custom, completed and mutually accepted agreement and statement of work are required before paid services begin. They are not a substitute for legal advice.</p>
-        <p><Link className="button button-primary" href="/author-agreements/forms">Open Fillable Agreement Forms →</Link></p>\n        <div className="page-card-grid">
+      <section>
+        <p className="page-lead"><strong>Review templates — not an executed contract.</strong> These example provisions help you understand our process. A custom, completed and mutually accepted agreement and statement of work are required before paid services begin. They are not a substitute for legal advice.</p>
+        <p><Link className="button button-primary" href="/author-agreements/forms">Open Fillable Agreement Forms →</Link></p>
+        <div className="page-card-grid">
           <article className="page-card"><div className="card-icon">01</div><h3>Author Services Agreement</h3><p>Defines the relationship, copyright permissions, payment standards, approval rights, confidentiality and cancellation process.</p><a className="text-link" href="#services-agreement">Review agreement →</a></article>
           <article className="page-card"><div className="card-icon">02</div><h3>Project Statement of Work</h3><p>Captures the exact editing, design, formatting, distribution, schedules, revisions and project fees.</p><a className="text-link" href="#statement-of-work">Review project checklist →</a></article>
           <article className="page-card"><div className="card-icon">03</div><h3>Publication Approval</h3><p>Records the author’s explicit consent before a finalized edition is uploaded or released.</p><a className="text-link" href="#publication-approval">Review approval form →</a></article>
