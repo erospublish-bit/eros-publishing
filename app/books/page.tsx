@@ -4,6 +4,7 @@ import { books, type BookFormat } from '@/lib/books';
 
 const formats: { id: string; format: BookFormat; title: string; emptyMessage: string }[] = [
   { id: 'paperback', format: 'Paperback', title: 'Paperback', emptyMessage: 'No paperback editions are available yet.' },
+  { id: 'hardcover', format: 'Hardcover', title: 'Hardcover', emptyMessage: 'No hardcover editions are available yet.' },
   { id: 'audiobooks', format: 'Audiobook', title: 'Audiobooks', emptyMessage: 'No audiobook editions are available yet.' },
   { id: 'ebooks', format: 'Ebook', title: 'E-books', emptyMessage: 'No e-book editions are available yet.' },
 ];
@@ -42,8 +43,6 @@ export default function BooksPage() {
                           <a key={label} href={url} target="_blank" rel="noreferrer">{label} ↗</a>
                         )) : format === 'Audiobook' && book.audiobookUrl ? (
                           <a href={book.audiobookUrl} target="_blank" rel="noreferrer">Listen on Spotify ↗</a>
-                        ) : book.luluBuyButtonId ? (
-                          <a href={`https://svc.lulu.com/?items=${book.luluBuyButtonId}`} target="_blank" rel="noreferrer">Visit our Marketplace ↗</a>
                         ) : null}
                       </div>
                     </article>
