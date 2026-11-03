@@ -1,63 +1,83 @@
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
-import { books, type BookFormat } from '@/lib/books';
+import { books, type Book, type BookFormat } from '@/lib/books';
 
-const formats: { id: string; format: BookFormat; title: string; emptyMessage: string }[] = [
-  { id: 'paperback', format: 'Paperback', title: 'Paperback', emptyMessage: 'No paperback editions are available yet.' },
-  { id: 'hardcover', format: 'Hardcover', title: 'Hardcover', emptyMessage: 'No hardcover editions are available yet.' },
-  { id: 'audiobooks', format: 'Audiobook', title: 'Audiobooks', emptyMessage: 'No audiobook editions are available yet.' },
-  { id: 'ebooks', format: 'Ebook', title: 'E-books', emptyMessage: 'No e-book editions are available yet.' },
+export const metadata: Metadata = {
+  title: 'Books & Editions | Eros Publishing',
+  description: 'Explore suspense fiction from Eros Publishing. Compare paperback, hardcover, e-book, and audiobook editions and choose where to buy or listen.',
+  alternates: { canonical: 'https://erospublishingkc.com/books' },
+};
+
+const formats: { id: string; format: BookFormat; title: string; description: string; action: string }[] = [
+  { id: 'paperback', format: 'Paperback', title: 'Paperback', description: 'A flexible print edition for everyday reading. Order through Lulu, our print partner.', action: 'Shop paperback' },
+  { id: 'hardcover', format: 'Hardcover', title: 'Hardcover', description: 'A sturdy, shelf-ready print edition. Order through Lulu, our print partner.', action: 'Shop hardcover' },
+  { id: 'ebooks', format: 'Ebook', title: 'E-book', description: 'Read digitally on your compatible device or reading app. Choose your retailer below.', action: 'Explore e-book' },
+  { id: 'audiobooks', format: 'Audiobook', title: 'Audiobook', description: 'Experience the story in audio through Spotify. Availability and access terms are shown on Spotify.', action: 'Explore audiobook' },
 ];
+
+function hasEdition(book: Book, format: BookFormat) {
+  if (format === 'Paperback') return Boolean(book.luluBuyButtonId);
+  if (format === 'Hardcover') return Boolean(book.hardcoverLuluBuyButtonId);
+  if (format === 'Ebook') return Boolean(book.ebookLinks?.length);
+  return Boolean(book.audiobookUrl);
+}
 
 export default function BooksPage() {
   return (
     <PageShell
       eyebrow="THE EROS BOOKSHELF"
-      title="Find your next"
-      accent="obsession."
-      intro="Explore stories selected for readers who love atmosphere, emotion, suspense, and unforgettable characters. Browse our titles by format to see what's available."
+      title="Stories worth"
+      accent="staying for."
+      intro="Discover Eros Publishing fiction and choose how you want to experience each story. Find print editions, digital retailers, and listening options in one place."
     >
-      <div id="formats" className="book-formats">
-        <h2 className="page-section-heading">Browse by format</h2>
-        <p className="page-lead">Find the edition that fits the way you love to read.</p>
-
-        {formats.map(({ id, format, title, emptyMessage }) => {
-          const formatBooks = books.filter(
-            (book) => book.formats.includes(format) || (format === 'Audiobook' && Boolean(book.audiobookUrl)) || (format === 'Ebook' && Boolean(book.ebookLinks?.length)),
-          );
-
-          return (
-            <section className="book-format-section" id={id} key={format}>
-              <h3 className="book-format-heading">{title}</h3>
-              {formatBooks.length > 0 ? (
-                <div className="page-card-grid format-card-grid">
-                  {formatBooks.map((book) => (
-                    <article className="page-card" key={book.id}>
-                      <div className="card-icon" aria-hidden="true">✦</div>
-                      <h4>{book.title}</h4>
-                      <p className="format-book-byline">{book.genre} by {book.author}</p>
-                      <p>{book.description}</p>
-                      <div className="format-store-links">
-                        <Link href={`/books/${book.id}${format === 'Paperback' || format === 'Hardcover' ? '#editions' : ''}`}>{format === 'Paperback' || format === 'Hardcover' ? `Choose ${format.toLowerCase()} edition →` : 'View book details →'}</Link>
-                        {format === 'Ebook' && book.ebookLinks ? book.ebookLinks.map(({ label, url }) => (
-                          <a key={label} href={url} target="_blank" rel="noreferrer">{label} ↗</a>
-                        )) : format === 'Audiobook' && book.audiobookUrl ? (
-                          <a href={book.audiobookUrl} target="_blank" rel="noreferrer">Listen on Spotify ↗</a>
-                        ) : null}
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              ) : <p className="format-empty-state">{emptyMessage}</p>}
-            </section>
-          );
-        })}
-      </div>
-
+      <section className="book-shop-intro">
+        <h2 className="page-section-heading">Featured book</h2>
+        {books.map((book) => (
+          <article className="book-shop-feature" key={book.id}>
+            <Link className="book-shop-cover" href={`/books/${book.id}`}>
+              <Image src={book.cover} alt={`Cover of ${book.title} by ${book.author}`} width={420} height={420} sizes="(max-width: 680px) 80vw, 280px" />
+            </Link>
+            <div>
+              <div className="card-icon">{book.genre}</div>
+              <h3>{book.title}</h3>
+              <p className="book-detail-byline">By {book.author}</p>
+              <p>{book.description}</p>
+              <p className="book-shop-availability"><strong>Available formats:</strong> {formats.filter(({format}) => hasEdition(book,format)).map(({title})=>title).join(' · ')}</p>
+              <Link className="button button-primary" href={`/books/${book.id}#editions`}>Compare editions & buy →</Link>
+            </div>
+          </article>
+        ))}
+      </section>
+      <section id="formats">
+        <h2 className="page-section-heading">Shop by format</h2>
+        <p className="page-lead">Find the edition you want and follow the retailer link to complete your purchase or start listening. Print orders are handled by Lulu; digital and audio purchases or access are handled by their respective platforms.</p>
+        <div className="book-shop-formats">
+          {formats.map(({ id, format, title, description, action }) => {
+            const available = books.filter((book) => hasEdition(book, format));
+            return (
+              <section className="book-shop-format" id={id} key={format}>
+                <div className="card-icon">{format === 'Ebook' ? 'DIGITAL EDITION' : format === 'Audiobook' ? 'LISTEN' : 'PRINT EDITION'}</div>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                {available.length ? available.map((book) => (
+                  <div className="book-shop-format-links" key={book.id}>
+                    <strong>{book.title}</strong>
+                    <Link href={`/books/${book.id}#${id === 'paperback' ? 'edition-paperback' : id === 'hardcover' ? 'edition-hardcover' : id === 'ebooks' ? 'edition-ebook' : 'edition-audiobook'}`}>{action} →</Link>
+                    {format === 'Ebook' && book.ebookLinks?.map(({label,url})=><a href={url} key={label} target="_blank" rel="noopener noreferrer">{label} ↗</a>)}
+                    {format === 'Audiobook' && book.audiobookUrl && <a href={book.audiobookUrl} target="_blank" rel="noopener noreferrer">Listen on Spotify ↗</a>}
+                  </div>
+                )) : <p>No editions currently listed in this format.</p>}
+              </section>
+            );
+          })}
+        </div>
+      </section>
       <section className="page-cta-panel">
-        <h2>Ready to bring a story home?</h2>
-        <p>Open a book page to read the synopsis, explore available formats, and choose your preferred retailer or listening platform.</p>
-        <Link className="button button-light" href="/books/no-love-lost-in-the-village">View the featured book →</Link>
+        <h2>Find the format that fits your story.</h2>
+        <p>Browse the complete book details, then choose the seller or listening platform that works for you. Pricing and availability are confirmed by each provider.</p>
+        <Link className="button button-light" href="/books/no-love-lost-in-the-village#editions">Explore available editions →</Link>
       </section>
     </PageShell>
   );
