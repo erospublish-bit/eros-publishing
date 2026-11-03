@@ -97,7 +97,7 @@ export default function NoLoveLostInTheVillagePage() {
         </div>
       </section>
 
-      <section>
+      <section id="editions">
         <h2 className="page-section-heading">Choose your edition</h2>
         <p className="page-lead">Read it in print or e-book format, or experience the story as an audiobook.</p>
         {(book.luluBuyButtonId || book.hardcoverLuluBuyButtonId) && <Script src="https://js.lulu.com/lulu-buy.js" strategy="afterInteractive" />}
