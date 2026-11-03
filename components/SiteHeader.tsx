@@ -29,7 +29,7 @@ export function SiteHeader({ homeHref = '/' }: SiteHeaderProps) {
         <Link href="/contact" onClick={closeMenu}>Contact</Link>
       </nav>
       <div className="header-actions">
-        <Link className="button button-primary page-header-cta quote-header-cta" href="/publishing-quote" onClick={closeMenu}>Request a Quote <span aria-hidden="true">→</span></Link>
+        <Link className="button button-primary page-header-cta quote-header-cta" href="/publishing-quote" onClick={closeMenu}>Free Consultation <span aria-hidden="true">→</span></Link>
         <button
           className="icon-button mobile-menu-button"
           type="button"
