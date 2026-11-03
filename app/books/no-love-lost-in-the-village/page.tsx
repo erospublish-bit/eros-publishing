@@ -7,7 +7,7 @@ import { books } from '@/lib/books';
 
 const book = books.find((item) => item.id === 'no-love-lost-in-the-village')!;
 const bookUrl = 'https://erospublishingkc.com/books/no-love-lost-in-the-village';
-const coverUrl = 'https://erospublishingkc.com/_next/static/media/no-love-lost-in-the-village-web.webp';
+const coverUrl = 'https://erospublishingkc.com/images/no-love-lost-in-the-village-web.webp';
 
 export const metadata: Metadata = {
   title: 'No Love Lost in the Village by B. Eros | Eros Publishing',
@@ -84,7 +84,7 @@ export default function NoLoveLostInTheVillagePage() {
 
           <div className="book-detail-actions">
             {book.ebookLinks?.map(({ label, url }) => (
-              <a className="button button-primary" key={label} href={url} target="_blank" rel="noreferrer">
+              <a className="button button-primary" key={label} href={url} target="_blank" rel="noopener noreferrer">
                 E-book on {label} ↗
               </a>
             ))}
@@ -101,11 +101,11 @@ export default function NoLoveLostInTheVillagePage() {
         <h2 className="page-section-heading">Choose your edition</h2>
         <p className="page-lead">Read it in print or e-book format, or experience the story as an audiobook.</p>
         {(book.luluBuyButtonId || book.hardcoverLuluBuyButtonId) && <Script src="https://js.lulu.com/lulu-buy.js" strategy="afterInteractive" />}
-        <div className="page-card-grid">
-          <article className="page-card">
+        <div className="book-edition-grid">
+          <article className="page-card book-edition-card" id="edition-paperback">
             <div className="card-icon">PRINT · PAPERBACK</div>
             <h3>Paperback</h3>
-            <p>Order the paperback through Lulu.</p>
+            <p>Enjoy the story in a flexible print format. Order securely through Lulu, which handles pricing, printing, and fulfillment.</p>
             {book.luluBuyButtonId && (
               // @ts-expect-error Lulu defines this custom element in its external script.
               <lulu-buy-button buy-button-id={book.luluBuyButtonId} variant={book.luluVariant || 'product-showcase'} />
@@ -113,19 +113,19 @@ export default function NoLoveLostInTheVillagePage() {
           </article>
 
           {book.hardcoverLuluBuyButtonId && (
-            <article className="page-card">
+            <article className="page-card book-edition-card" id="edition-hardcover">
               <div className="card-icon">PRINT · HARDCOVER</div>
               <h3>Hardcover</h3>
-              <p>Order the hardcover edition through Lulu.</p>
+              <p>Choose a durable hardcover for your personal library or as a gift. Lulu handles the order, printing, and delivery.</p>
               {/* @ts-expect-error Lulu defines this custom element in its external script. */}
               <lulu-buy-button buy-button-id={book.hardcoverLuluBuyButtonId} variant={book.luluVariant || 'product-showcase'} />
             </article>
           )}
 
-          <article className="page-card">
+          <article className="page-card book-edition-card" id="edition-ebook">
             <div className="card-icon">DIGITAL</div>
             <h3>E-book</h3>
-            <p>Choose your preferred retailer for the digital edition.</p>
+            <p>Read on a supported device or reading app. Choose a retailer to check the current price and supported formats.</p>
             <div className="format-store-links">
               {book.ebookLinks?.map(({ label, url }) => (
                 <a key={label} href={url} target="_blank" rel="noreferrer">{label} ↗</a>
@@ -133,13 +133,14 @@ export default function NoLoveLostInTheVillagePage() {
             </div>
           </article>
 
-          <article className="page-card">
+          <article className="page-card book-edition-card" id="edition-audiobook">
             <div className="card-icon">AUDIO</div>
             <h3>Audiobook</h3>
-            <p>Listen to the audiobook edition on Spotify.</p>
+            <p>Listen through Spotify. Check Spotify for access, pricing, and region availability.</p>
             {book.audiobookUrl && <a href={book.audiobookUrl} target="_blank" rel="noreferrer">Listen on Spotify ↗</a>}
           </article>
         </div>
+        <p className="book-purchase-note">Purchases and listening access take place with the named third-party provider. Prices, delivery options, and availability may vary by platform.</p>
       </section>
 
       <section>
