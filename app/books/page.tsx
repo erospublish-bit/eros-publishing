@@ -38,7 +38,7 @@ export default function BooksPage() {
                       <p className="format-book-byline">{book.genre} by {book.author}</p>
                       <p>{book.description}</p>
                       <div className="format-store-links">
-                        <Link href={`/books/${book.id}`}>View book details →</Link>
+                        <Link href={`/books/${book.id}${format === 'Paperback' || format === 'Hardcover' ? '#editions' : ''}`}>{format === 'Paperback' || format === 'Hardcover' ? `Choose ${format.toLowerCase()} edition →` : 'View book details →'}</Link>
                         {format === 'Ebook' && book.ebookLinks ? book.ebookLinks.map(({ label, url }) => (
                           <a key={label} href={url} target="_blank" rel="noreferrer">{label} ↗</a>
                         )) : format === 'Audiobook' && book.audiobookUrl ? (
