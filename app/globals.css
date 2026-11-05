@@ -111,3 +111,9 @@
 .author-tip-qr a{display:block;background:#fff;border-radius:9px;padding:10px;line-height:0;max-width:100%}
 .author-tip-qr img{display:block;width:156px;height:156px;max-width:100%;image-rendering:pixelated}
 .author-tip-qr span{font-size:10px;color:#dfc9bc;line-height:1.5}
+
+
+/* Center QR and reduce displayed size by 25% (156px -> 117px). */
+.author-tip-qr{width:100%;align-items:center;text-align:center}
+.author-tip-qr a{display:block;width:max-content;max-width:100%;margin-inline:auto}
+.author-tip-qr img{display:block;width:117px;height:117px;max-width:100%;margin-inline:auto}
