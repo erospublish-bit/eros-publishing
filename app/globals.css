@@ -117,3 +117,6 @@
 .author-tip-qr{width:100%;align-items:center;text-align:center}
 .author-tip-qr a{display:block;width:max-content;max-width:100%;margin-inline:auto}
 .author-tip-qr img{display:block;width:117px;height:117px;max-width:100%;margin-inline:auto}
+
+/* Further reduce tip QR by 25%: 117px to 88px (rounded). */
+.author-tip-qr img{width:88px;height:88px}
