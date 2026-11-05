@@ -37,3 +37,32 @@
 .quick-quote-consent{margin-top:24px}
 .quick-quote-consent a{text-decoration:underline;color:var(--red)}
 @media(max-width:850px){.quick-quote-layout{grid-template-columns:1fr}}
+
+
+/* Author tip — Eros Publishing premium card */
+.author-tip{margin-top:2rem;background:radial-gradient(circle at 100% 0%,rgba(200,163,106,.13),transparent 42%),linear-gradient(135deg,#32131d,#4c1c2a);color:#fff5e5;border:1px solid #78505b;border-radius:16px;padding:clamp(22px,4vw,38px);box-shadow:0 18px 42px rgba(49,16,27,.13)}
+.author-tip-inner{max-width:560px;margin:0 auto}
+.author-tip-kicker{display:flex;align-items:center;gap:9px;color:#e5c48d;font-size:10px;letter-spacing:1.5px;font-weight:700}
+.author-tip-kicker span{font-size:20px;line-height:1}
+.author-tip h2{font-family:var(--serif);font-size:clamp(29px,3.8vw,42px);line-height:1.2;font-weight:500;letter-spacing:-.6px;margin:14px 0 12px;color:#fff5e5}
+.author-tip-intro{color:#f0dacc;font-size:13px;line-height:1.85;margin:0 0 23px}
+.author-tip-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px}
+.author-tip-choice,.author-tip-custom{background:#542d38;border:1px solid #88636b;border-radius:8px;color:#fff5e5;font-weight:700;transition:background .18s,border-color .18s,transform .18s}
+.author-tip-choice{min-height:54px;font-size:17px}
+.author-tip-custom{width:100%;min-height:46px;font-size:12px}
+.author-tip-choice:hover,.author-tip-custom:hover{border-color:#e5c48d;transform:translateY(-1px)}
+.author-tip-choice.is-selected,.author-tip-custom.is-selected{background:#e5c48d;color:#32131d;border-color:#e5c48d}
+.author-tip-choice:focus-visible,.author-tip-custom:focus-visible,.author-tip-custom-label input:focus-visible{outline:3px solid #fff5e5;outline-offset:3px}
+.author-tip-custom-label{display:grid;gap:8px;margin-top:15px;font-size:12px;color:#f5e6d8;font-weight:600}
+.author-tip-custom-label input{width:100%;max-width:240px;border:1px solid #b5959b;border-radius:7px;padding:12px 14px;background:#fffaf5;color:#32131d}
+.author-tip-total{color:#f0dacc;font-size:12px;margin:19px 0 13px}
+.author-tip-total strong{font-size:17px;color:#fff5e5;margin-left:5px}
+.author-tip-paypal{min-height:45px;max-width:560px}
+.author-tip-notice,.author-tip-error{font-size:12px;line-height:1.6;padding:12px;border-radius:7px}
+.author-tip-notice{background:#ffffff14;color:#fff5e5}
+.author-tip-error{background:#ffe5e0;color:#6c1925}
+.author-tip-success{border:1px solid #d8ba82;border-radius:8px;padding:20px;background:#ffffff12}
+.author-tip-success strong{color:#e5c48d;font-family:var(--serif);font-size:23px}
+.author-tip-success p{color:#fff5e5;margin:8px 0 0}
+.author-tip-footer{border-top:1px solid #ffffff25;padding-top:16px;margin:20px 0 0;text-align:center;color:#dfc9bc;font-size:10px;line-height:1.6}
+@media(max-width:480px){.author-tip{padding:22px 17px}.author-tip-kicker{font-size:9px;letter-spacing:1px}.author-tip-choice{min-height:48px}}
