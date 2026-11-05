@@ -60,27 +60,29 @@ export function AuthorTip() {
   }, [sdkReady, amount, valid, success]);
 
   return (
-    <section className="page-card" aria-labelledby="author-tip-heading" style={{ marginTop: '2rem' }}>
-      <div className="card-icon">SUPPORT INDEPENDENT FICTION</div>
-      <h2 id="author-tip-heading" className="page-section-heading">Tip the Author</h2>
-      <p>Enjoyed <em>No Love Lost in the Village</em>? Support B. Eros and future stories with an optional tip.</p>
-      {!success ? <>
-        <div role="group" aria-label="Tip amount" style={{ display: 'flex', gap: '.75rem', flexWrap: 'wrap', margin: '1rem 0' }}>
-          {['3', '5', '10', 'custom'].map(value => (
-            <button key={value} type="button" className={choice === value ? 'button button-primary' : 'button book-secondary-button'} aria-pressed={choice === value} onClick={() => { setChoice(value); setError(''); }}>
-              {value === 'custom' ? 'Custom amount' : '$' + value}
-            </button>
-          ))}
-        </div>
-        {choice === 'custom' && <label style={{ display: 'block', marginBottom: '1rem' }}>Custom tip amount (USD)
-          <input type="number" min="1" max="10000" step="0.01" inputMode="decimal" value={custom} onChange={event => setCustom(event.target.value)} placeholder="Enter an amount" style={{ display: 'block', maxWidth: '220px', padding: '.65rem', marginTop: '.4rem' }} />
-        </label>}
-        {valid && <p>Selected tip: <strong>${Number(amount).toFixed(2)}</strong></p>}
-        {!valid && <p role="status">Enter a tip between $1 and $10,000.</p>}
-        {enabled ? <div ref={container} aria-label="PayPal checkout" /> : <p role="status">PayPal checkout is being configured. Please check back soon.</p>}
-        {error && <p role="alert">{error}</p>}
-      </> : <p role="status">Thank you for supporting B. Eros! PayPal confirmed your payment.</p>}
-      <p className="book-purchase-note">Tips are optional and processed securely by PayPal. No purchase is required.</p>
+    <section className="author-tip" aria-labelledby="author-tip-heading">
+      <div className="author-tip-inner">
+        <div className="author-tip-kicker"><span aria-hidden="true">♥</span> SUPPORT INDEPENDENT STORYTELLING</div>
+        <h2 id="author-tip-heading">Enjoyed the story?</h2>
+        <p className="author-tip-intro">Leave a little appreciation for B. Eros. Every tip helps bring the next story to life.</p>
+        {!success ? <>
+          <div className="author-tip-choices" role="group" aria-label="Choose a tip amount">
+            {['3', '5', '10'].map(value => (
+              <button key={value} type="button" className={choice === value ? 'author-tip-choice is-selected' : 'author-tip-choice'} aria-pressed={choice === value} onClick={() => { setChoice(value); setError(''); }}>
+                {'$' + value}
+              </button>
+            ))}
+          </div>
+          <button type="button" className={choice === 'custom' ? 'author-tip-custom is-selected' : 'author-tip-custom'} aria-pressed={choice === 'custom'} onClick={() => { setChoice('custom'); setError(''); }}>Choose your own amount</button>
+          {choice === 'custom' && <label className="author-tip-custom-label" htmlFor="author-tip-custom-amount">Custom tip amount (USD)
+            <input id="author-tip-custom-amount" type="number" min="1" max="10000" step="0.01" inputMode="decimal" value={custom} onChange={event => setCustom(event.target.value)} placeholder="Enter an amount" />
+          </label>}
+          <div className="author-tip-total" role="status">{valid ? <>Your tip: <strong>{'$' + Number(amount).toFixed(2)}</strong></> : 'Enter a tip between $1 and $10,000.'}</div>
+          {enabled ? <div className="author-tip-paypal" ref={container} aria-label="Secure PayPal checkout" /> : <p className="author-tip-notice" role="status">PayPal checkout is being configured. Please check back soon.</p>}
+          {error && <p className="author-tip-error" role="alert">{error}</p>}
+        </> : <div className="author-tip-success" role="status"><strong>Thank you for your support!</strong><p>PayPal confirmed your tip to B. Eros.</p></div>}
+        <p className="author-tip-footer"><span aria-hidden="true">♧</span> Secure checkout powered by PayPal. Tips are optional; no purchase required.</p>
+      </div>
     </section>
   );
 }
