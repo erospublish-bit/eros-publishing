@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 import { PageShell } from '@/components/PageShell';
+import { AuthorTip } from '@/components/AuthorTip';
 import { books } from '@/lib/books';
 
 const book = books.find((item) => item.id === 'no-love-lost-in-the-village')!;
@@ -144,6 +145,8 @@ export default function NoLoveLostInTheVillagePage() {
         </div>
         <p className="book-purchase-note">Purchases and listening access take place with the named third-party provider. Prices, delivery options, and availability may vary by platform.</p>
       </section>
+
+      <AuthorTip />
 
       <section>
         <h2 className="page-section-heading">Inside the story</h2>
