@@ -66,3 +66,17 @@
 .author-tip-success p{color:#fff5e5;margin:8px 0 0}
 .author-tip-footer{border-top:1px solid #ffffff25;padding-top:16px;margin:20px 0 0;text-align:center;color:#dfc9bc;font-size:10px;line-height:1.6}
 @media(max-width:480px){.author-tip{padding:22px 17px}.author-tip-kicker{font-size:9px;letter-spacing:1px}.author-tip-choice{min-height:48px}}
+
+
+/* Compact author tip: approximately 40% smaller footprint */
+.author-tip{width:60%;max-width:440px;margin:2rem auto 0;padding:22px}
+.author-tip h2{font-size:clamp(23px,2.5vw,30px)}
+.author-tip-intro{font-size:11px;line-height:1.65;margin-bottom:15px}
+.author-tip-kicker{font-size:9px;letter-spacing:1px}
+.author-tip-choices{gap:7px;margin-bottom:7px}
+.author-tip-choice{min-height:38px;font-size:14px}
+.author-tip-custom{min-height:36px;font-size:11px}
+.author-tip-total{margin:12px 0 9px}
+.author-tip-total strong{font-size:14px}
+.author-tip-footer{margin-top:13px;padding-top:12px;font-size:9px}
+@media(max-width:680px){.author-tip{width:100%;max-width:440px;padding:20px 17px}}
