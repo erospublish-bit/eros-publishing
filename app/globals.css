@@ -80,3 +80,19 @@
 .author-tip-total strong{font-size:14px}
 .author-tip-footer{margin-top:13px;padding-top:12px;font-size:9px}
 @media(max-width:680px){.author-tip{width:100%;max-width:440px;padding:20px 17px}}
+
+
+/* Responsive Lulu edition product imagery and embedded showcases */
+#editions .book-edition-grid{min-width:0}
+#editions .book-edition-card{min-width:0;max-width:100%;overflow:hidden}
+#editions .book-edition-card lulu-buy-button{display:block;width:100%;max-width:100%;min-width:0;overflow:hidden}
+#editions .book-edition-card img,
+#editions .book-edition-card picture,
+#editions .book-edition-card video{max-width:100%;height:auto;object-fit:contain}
+#editions .book-edition-card iframe{display:block;max-width:100%;border:0}
+@media(max-width:680px){
+  #editions .book-edition-grid{grid-template-columns:minmax(0,1fr)}
+  #editions .book-edition-card{width:100%;padding:20px 16px}
+  #editions .book-edition-card lulu-buy-button{width:100%;max-width:100%;margin-inline:auto}
+  #editions .book-edition-card img{display:block;max-width:100%;width:auto;height:auto;margin-inline:auto}
+}
