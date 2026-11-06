@@ -23,3 +23,7 @@ jobs:
         run: npm run typecheck
       - name: Build
         run: npm run build
+      - name: Local route, metadata and sitemap smoke checks
+        run: npm run smoke
+      - name: Production dependency audit (high and critical)
+        run: npm audit --omit=dev --audit-level=high
