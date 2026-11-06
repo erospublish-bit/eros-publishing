@@ -1,0 +1,25 @@
+/* Shared accessibility/type improvements, separate from historical component rules. */
+:root { --focus-outline: #9d2f44; }
+body { font-size: 16px; line-height: 1.6; }
+.main-nav { font-size: 14px; }
+.button, .text-link { font-size: 14px; min-height: 44px; }
+.icon-button, .mobile-menu-button { min-width: 44px; min-height: 44px; }
+.eyebrow, .card-icon, .catalog-count, .book-number { font-size: 12px; letter-spacing: .075em; }
+.announcement { font-size: 11px; height: auto; min-height: 32px; padding: 6px 12px; }
+.copyright, .site-footer small, .hero-caption small { font-size: 12px; }
+.page-lead, .page-card p, .page-card li { font-size: 16px; line-height: 1.7; }
+:where(a, button, input, select, textarea, summary):focus-visible { outline: 3px solid var(--focus-outline); outline-offset: 3px; }
+.author-tip :where(a, button, input):focus-visible, .site-footer a:focus-visible { outline-color: #e5c48d; }
+.author-tip-choice, .author-tip-custom { min-height: 44px; }
+.skip-link { position: fixed; top: 10px; left: 12px; z-index: 9999; transform: translateY(-200%); background: #fffaf5; color: #541923; border: 2px solid #541923; padding: 12px 18px; font-weight: 700; }
+.skip-link:focus { transform: translateY(0); }
+@media (max-width: 680px) {
+  .announcement { font-size: 10px; letter-spacing: .05em; }
+  .button, .text-link { font-size: 14px; }
+  .hero-copy > p, .section-heading p { font-size: 16px; line-height: 1.7; }
+  .site-footer { padding-left: 6%; padding-right: 6%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+}

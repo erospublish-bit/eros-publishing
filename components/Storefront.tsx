@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, BookOpen, ChevronDown, Download, Headphones, Heart, Sparkles } from 'lucide-react';
 import { SiteHeader } from '@/components/SiteHeader';
+import { SiteFooter } from '@/components/SiteFooter';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
 const LULU_BOOK_ID = 'no-love-lost-in-the-village';
@@ -50,7 +51,7 @@ export default function Storefront() {
   return <>
     <div className="announcement"><Sparkles size={14} /> STORIES WITH A LITTLE DIVINE FIRE <span className="announcement-dot">✦</span> INDEPENDENTLY PUBLISHED, FOREVER REMEMBERED</div>
     <SiteHeader homeHref="#home" />
-    <main>
+    <main id="main-content">
       <section className="hero" id="home"><div className="hero-glow"/><div className="hero-copy"><div className="eyebrow"><span/> THE HOME OF STORIES THAT STAY WITH YOU</div><h1>Fall in love<br/>with <em>the story.</em></h1><p>Discover books that move you—or bring your own manuscript to life with professional editing, design, formatting, and publishing support.</p><div className="hero-actions"><a className="button button-primary" href="#books">Explore Our Books <ArrowRight size={17}/></a><Link className="text-link" href="/publishing-quote">Publish With Eros <ArrowRight size={15}/></Link></div><div className="hero-proof"><span className="proof-icon"><Heart size={15}/></span><span>For readers, dreamers, and authors ready to publish.</span></div></div><div className="hero-art" aria-label="Decorative mythology-inspired illustration"><div className="orbit orbit-one"/><div className="orbit orbit-two"/><div className="sun-disc"><span>✦</span></div><div className="hero-statue"><span className="statue-wings">⌁</span><span className="statue-head"/><span className="statue-body"/><span className="statue-cloth"/><span className="statue-base"/></div><div className="hero-caption"><span>✦</span><div><b>Inspired by Eros</b><small>Love, desire & the art of creation</small></div></div></div></section>
       <section className="value-strip"><div><BookOpen/><span><b>Author retains rights</b><small>Your work stays yours</small></span></div><div><Sparkles/><span><b>Transparent pricing</b><small>Service-based publishing support</small></span></div><div><Headphones/><span><b>Multi-format publishing</b><small>Print, e-book & audiobook guidance</small></span></div></section>
 
@@ -72,6 +73,6 @@ export default function Storefront() {
       <section className="manifesto"><div className="manifesto-symbol">❧</div><div className="eyebrow"><span/> MEET THE PUBLISHER</div><h2>Brandan Rayton<br/><em>Founder & Publisher.</em></h2><p>Author and independent publisher Brandan Rayton founded Eros Publishing to give writers a clearer path from manuscript to published book—without asking them to surrender ownership of their work.</p><Link className="text-link" href="/about">Meet Brandan & Eros Publishing <ArrowRight size={15}/></Link></section>
       <section className="page-cta-panel"><h2>Your manuscript deserves more than a file on your computer.</h2><p>Professional editing, design, formatting, and publishing support—while you retain control of your book.</p><Link className="button button-light" href="/publishing-quote">Request a Publishing Quote <ArrowRight size={17}/></Link></section>
     </main>
-    <footer className="site-footer"><a href="#home" className="brand footer-brand"><span className="brand-mark">E<span>✦</span></span><span className="brand-copy"><strong>EROS</strong><small>P U B L I S H I N G</small></span></a><p>Stories that stir something eternal.</p><div className="footer-links"><Link href="/books">Books</Link><Link href="/portfolio">Portfolio</Link><Link href="/blog">Blog</Link><Link href="/author-services">Author services</Link><Link href="/publishing-pricing">Pricing</Link><Link href="/publishing-quote">Request a Quote</Link><Link href="/about">Our story</Link><Link href="/contact">Contact</Link></div><small className="copyright">© {new Date().getFullYear()} Eros Publishing. Independent publishing services based in Kansas City, serving authors nationwide.</small></footer>
+    <SiteFooter />
   </>;
 }

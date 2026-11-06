@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
+import './accessibility.css';
 import coverImage from '@/images/no-love-lost-in-the-village-web.webp';
 
 const siteUrl = 'https://erospublishingkc.com';
@@ -56,6 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en">
       <body>
+        <a className="skip-link" href="#main-content">Skip to main content</a>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-1M5DXNQF7F" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
