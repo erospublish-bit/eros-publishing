@@ -3,6 +3,7 @@
 import { FormEvent, useState } from 'react';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
+import { trackPublicEvent } from '@/lib/analytics';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xoeepyak';
 
@@ -53,6 +54,7 @@ export default function DetailedPublishingQuotePage() {
 
       form.reset();
       setSubmitState('success');
+      trackPublicEvent('generate_lead', { form_type: 'detailed_quote' });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       setSubmitState('error');
@@ -90,10 +92,11 @@ export default function DetailedPublishingQuotePage() {
         </section>
       )}
 
+      <nav className="section-jumps" aria-label="Quote form sections"><a href="#quote-about">About you</a><a href="#quote-book">Your book</a><a href="#quote-services">Services</a><a href="#quote-distribution">Distribution</a><a href="#quote-goals">Goals</a><a href="#quote-review">Review</a></nav>
       <form className="quote-form" action={FORMSPREE_ENDPOINT} method="POST" onSubmit={handleSubmit}>
         <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }} />
 
-        <section className="quote-section">
+        <section className="quote-section" id="quote-about">
           <div className="quote-section-heading"><span>01</span><div><h2>About You</h2><p>Tell us how you prefer to communicate during the planning stage.</p></div></div>
           <div className="quote-grid">
             <label>Full Name *<input name="name" autoComplete="name" required /></label>
@@ -104,7 +107,7 @@ export default function DetailedPublishingQuotePage() {
           </div>
         </section>
 
-        <section className="quote-section">
+        <section className="quote-section" id="quote-book">
           <div className="quote-section-heading"><span>02</span><div><h2>About Your Book</h2><p>Give us enough context to understand the project. A polished synopsis is not required.</p></div></div>
           <div className="quote-grid">
             <label>Book Title or Working Title *<input name="title" required /></label>
@@ -116,21 +119,21 @@ export default function DetailedPublishingQuotePage() {
           </div>
         </section>
 
-        <section className="quote-section">
+        <section className="quote-section" id="quote-services">
           <div className="quote-section-heading"><span>03</span><div><h2>Publishing Services</h2><p>Select everything you may need. Unsure authors can ask us to recommend the right scope.</p></div></div>
-          <div className="quote-options">{services.map((item) => <label key={item}><input type="checkbox" name="services" value={item} /> <span>{item}</span></label>)}</div>
+          <fieldset className="quote-options"><legend className="sr-only">Choose publishing services</legend>{services.map((item) => <label key={item}><input type="checkbox" name="services" value={item} /> <span>{item}</span></label>)}</fieldset>
           <p style={{ marginTop: 18 }}>Not sure what editing, formatting, or distribution support you need? That is completely fine—select <strong>“I’m Not Sure — Recommend a Package.”</strong></p>
         </section>
 
-        <section className="quote-section">
+        <section className="quote-section" id="quote-distribution">
           <div className="quote-section-heading"><span>04</span><div><h2>Distribution & Formats</h2><p>Tell us where and how you would like readers to find your book. These choices can be refined later.</p></div></div>
           <h3 className="quote-subheading">Distribution platforms</h3>
-          <div className="quote-options">{platforms.map((item) => <label key={item}><input type="checkbox" name="platforms" value={item} /> <span>{item}</span></label>)}</div>
+          <fieldset className="quote-options"><legend className="sr-only">Choose distribution platforms</legend>{platforms.map((item) => <label key={item}><input type="checkbox" name="platforms" value={item} /> <span>{item}</span></label>)}</fieldset>
           <h3 className="quote-subheading">Publishing formats</h3>
-          <div className="quote-options">{formats.map((item) => <label key={item}><input type="checkbox" name="formats" value={item} /> <span>{item}</span></label>)}</div>
+          <fieldset className="quote-options"><legend className="sr-only">Choose book formats</legend>{formats.map((item) => <label key={item}><input type="checkbox" name="formats" value={item} /> <span>{item}</span></label>)}</fieldset>
         </section>
 
-        <section className="quote-section">
+        <section className="quote-section" id="quote-goals">
           <div className="quote-section-heading"><span>05</span><div><h2>Goals, Timing & Budget</h2><p>These answers help us recommend a realistic scope instead of an oversized package.</p></div></div>
           <div className="quote-grid">
             <label>Ideal Publication Date<input type="date" name="launchDate" /></label>
@@ -142,7 +145,7 @@ export default function DetailedPublishingQuotePage() {
           </div>
         </section>
 
-        <section className="quote-section quote-consent">
+        <section className="quote-section quote-consent" id="quote-review">
           <div className="quote-section-heading"><span>06</span><div><h2>Review & Submit</h2><p>Submitting an inquiry starts a conversation—it does not lock you into a publishing package.</p></div></div>
           <label><input type="checkbox" name="rightsConfirmed" value="Yes" required /> <span>I confirm that I own or have the necessary rights to the material described in this request.</span></label>
           <label><input type="checkbox" name="inquiryAcknowledged" value="Yes" required /> <span>I understand that submitting this form is a request for information and does not create a publishing agreement or guarantee publication, distribution, sales, or earnings.</span></label>

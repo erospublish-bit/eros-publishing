@@ -34,3 +34,6 @@ body { font-size: 16px; line-height: 1.6; }
 .section-jumps { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:0 0 30px; }
 .section-jumps a { display:inline-flex; min-height:44px; align-items:center; padding:9px 14px; background:#f0e3dc; color:#541923; font-weight:650; font-size:14px; text-decoration:none; border:1px solid #dcc8bc; border-radius:6px; }
 .section-jumps a:hover { background:#e8d1c4; }
+
+fieldset.quote-options { border: 0; margin: 0; padding: 0; min-width: 0; }
+#quote-about, #quote-book, #quote-services, #quote-distribution, #quote-goals, #quote-review { scroll-margin-top: 135px; }
