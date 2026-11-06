@@ -35,7 +35,7 @@ export default function Storefront() {
   useEffect(() => {
     if (!loadLulu) return;
     const existing = document.querySelector<HTMLScriptElement>('script[data-eros-lulu]');
-    if (existing) { if (customElements.get('lulu-buy-button')) setLuluReady(true); else existing.addEventListener('load', () => setLuluReady(true), { once: true }); return; }
+    if (existing) { if (customElements.get('lulu-buy-button')) queueMicrotask(() => setLuluReady(true)); else existing.addEventListener('load', () => setLuluReady(true), { once: true }); return; }
     const script = document.createElement('script');
     script.src = 'https://js.lulu.com/lulu-buy.js';
     script.async = true;

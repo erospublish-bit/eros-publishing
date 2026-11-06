@@ -1,4 +1,5 @@
 name: One-time dependency lock refresh (working branch only)
+# Refresh after correcting React hook lint issues.
 on:
   push:
     branches: [improve/sitewide-audit-nov-2026]

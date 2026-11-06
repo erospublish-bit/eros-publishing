@@ -21,11 +21,11 @@ export function AuthorTip() {
   const valid = /^(?:[1-9]\d{0,3}|10000)(?:\.\d{1,2})?$/.test(amount) && Number(amount) <= 10000;
   const orderBinding = useRef('');
   const selectedAmount = useRef(amount);
-  selectedAmount.current = amount;
+  useEffect(() => { selectedAmount.current = amount; }, [amount]);
 
   useEffect(() => {
     if (!enabled || !clientId) return;
-    if (window.paypal) { setSdkReady(true); return; }
+    if (window.paypal) { queueMicrotask(() => setSdkReady(true)); return; }
     const script = document.createElement('script');
     script.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(clientId) + '&currency=USD&intent=capture';
     script.async = true;

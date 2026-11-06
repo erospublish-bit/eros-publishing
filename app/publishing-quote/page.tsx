@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 import { trackPublicEvent } from '@/lib/analytics';
@@ -11,8 +11,11 @@ type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 export default function PublishingQuotePage() {
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [submitError, setSubmitError] = useState('');
-  const [packageInterest, setPackageInterest] = useState('');
-  useEffect(() => { setPackageInterest(new URLSearchParams(window.location.search).get('package')?.slice(0, 80) || ''); }, []);
+  const packageInterest = useSyncExternalStore(
+    () => () => {},
+    () => new URLSearchParams(window.location.search).get('package')?.slice(0, 80) || '',
+    () => ''
+  );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
