@@ -1,8 +1,9 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
+import { trackPublicEvent } from '@/lib/analytics';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/maeeaepa';
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
@@ -10,6 +11,11 @@ type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 export default function PublishingQuotePage() {
   const [submitState, setSubmitState] = useState<SubmitState>('idle');
   const [submitError, setSubmitError] = useState('');
+  const packageInterest = useSyncExternalStore(
+    () => () => {},
+    () => new URLSearchParams(window.location.search).get('package')?.slice(0, 80) || '',
+    () => ''
+  );
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -19,6 +25,7 @@ export default function PublishingQuotePage() {
     setSubmitError('');
     data.set('_subject', 'New Eros Publishing consultation inquiry');
     data.set('inquiryType', 'Quick Publishing Consultation');
+    if (packageInterest) data.set('packageInterest', packageInterest);
     data.set('submittedFrom', 'Eros Publishing — Quick Consultation');
 
     try {
@@ -41,6 +48,7 @@ export default function PublishingQuotePage() {
       }
       form.reset();
       setSubmitState('success');
+      trackPublicEvent('generate_lead', { form_type: 'quick_consultation' });
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       setSubmitState('error');
@@ -59,7 +67,8 @@ export default function PublishingQuotePage() {
         <div>
           <div className="card-icon">FREE INITIAL INQUIRY · ABOUT 2 MINUTES</div>
           <h2 className="page-section-heading">Request a publishing consultation</h2>
-          <p className="page-lead">Share your contact information and what kind of help you may need. You do not need a book title, exact word count, budget, or finished manuscript to get started.</p>
+          <p className="page-lead">Share your contact information and what kind of help you may need. The initial inquiry is free and does not include a paid strategy session, manuscript evaluation or commitment to purchase services.</p>
+          {packageInterest && <p className="page-card"><strong>Package of interest:</strong> {packageInterest}. We will include this preference with your inquiry; final scope and pricing will be discussed separately.</p>}
 
           {submitState === 'success' ? (
             <div className="quote-success" role="status" aria-live="polite">

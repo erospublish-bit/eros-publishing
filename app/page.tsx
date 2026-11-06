@@ -4,7 +4,7 @@ import Storefront from '@/components/Storefront';
 const siteUrl = 'https://erospublishingkc.com';
 
 export const metadata: Metadata = {
-  title: 'Eros Publishing | Independent Books & Publishing Services',
+  title: { absolute: 'Eros Publishing | Independent Books & Publishing Services' },
   description:
     'Eros Publishing is an independent publishing company based in Kansas City, offering books and professional self-publishing services for authors nationwide.',
   alternates: {
@@ -69,11 +69,11 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData).replace(/</g, '\\u003c') }}
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData).replace(/</g, '\\u003c') }}
       />
       <Storefront />
     </>

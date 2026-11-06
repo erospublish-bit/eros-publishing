@@ -15,6 +15,7 @@ export default function AgreementForms() {
  return (
   <PageShell eyebrow="AUTHOR DOCUMENT CENTER" title="Editable agreement" accent="forms." intro="Choose a form, complete the fields, and print or save a PDF for review and signatures. No form entries are transmitted to Eros Publishing from this page.">
    <section className="agreement-tool">
+    <p className="page-lead"><strong>Draft only (November 2026 version).</strong> This browser-only tool produces a printable working copy, not a legally executed contract or authenticated e-signature. To save it, select a form, complete your fields, choose Print / Save as PDF, then select Save as PDF in your browser's print dialog. Review page breaks and checkboxes before signing through an agreed process.</p>
     <div className="agreement-toolbar">
      <label htmlFor="agreement-template">Select document template</label>
      <select id="agreement-template" value={selected} onChange={e=>setSelected(e.target.value)}>
@@ -23,7 +24,7 @@ export default function AgreementForms() {
      <button type="button" className="button button-primary" onClick={()=>window.print()}>Print / Save as PDF →</button>
     </div>
     <div className="agreement-document">
-     <div className="agreement-document-heading"><small>EROS PUBLISHING · CLIENT DOCUMENT TEMPLATE</small><h2>{template.title}</h2><p>{template.subtitle}</p></div>
+     <div className="agreement-document-heading"><small>EROS PUBLISHING · CLIENT DOCUMENT TEMPLATE · NOV 2026</small><h2>{template.title}</h2><p>{template.subtitle}</p></div>
      <div className="agreement-fields">
       {template.fields.map(field=><label key={field.name} className={field.kind==='textarea'?'agreement-field agreement-wide':field.kind==='checkbox'?'agreement-field agreement-wide agreement-check':'agreement-field'}>
        {field.kind==='checkbox'?<><input type="checkbox" checked={current[field.name]==='Yes'} onChange={e=>update(field.name,e.target.checked?'Yes':'')} /><span>{field.label}{field.required?' *':''}</span></>:<><span>{field.label}{field.required?' *':''}</span>{field.kind==='textarea'?<textarea rows={4} value={current[field.name]||''} onChange={e=>update(field.name,e.target.value)} />:<input type={field.kind==='date'?'date':field.kind==='email'?'email':'text'} value={current[field.name]||''} onChange={e=>update(field.name,e.target.value)} />}</>}

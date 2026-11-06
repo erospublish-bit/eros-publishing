@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Legal & Publishing Policies | Eros Publishing',
+  title: 'Legal & Publishing Policies',
   description: 'Review Eros Publishing privacy, terms, refund and cancellation, copyright and DMCA, and publishing-services policies.',
+  alternates: { canonical: '/legal/' },
 };
 
 export default function LegalPage() {
@@ -16,7 +17,7 @@ export default function LegalPage() {
       intro="Clear expectations protect authors, readers, and the creative work entrusted to Eros Publishing. Review the policies that govern use of our website and publishing-service relationships."
     >
       <section>
-        <p className="page-lead"><strong>Last updated: November 3, 2026.</strong> These website policies provide general terms for Eros Publishing. Individual publishing projects may also be governed by a separate written service agreement, proposal, or statement of work. If a signed agreement conflicts with these general service policies, the signed agreement controls for that project.</p>
+        <p className="page-lead"><strong>Last updated: November 6, 2026.</strong> These website policies provide general terms for Eros Publishing. Individual publishing projects may also be governed by a separate written service agreement, proposal, or statement of work. If a signed agreement conflicts with these general service policies, the signed agreement controls for that project.</p>
 
         <div className="page-card-grid">
           <article className="page-card"><div className="card-icon">01</div><h3>Privacy</h3><p>How information submitted through this website may be collected, used, and protected.</p></article>
@@ -28,9 +29,9 @@ export default function LegalPage() {
       <section id="privacy">
         <h2 className="page-section-heading">Privacy Policy</h2>
         <p>Eros Publishing may receive information that you voluntarily provide when contacting us or requesting publishing services, such as your name, email address, project information, manuscript details, and other information included in your message. We use this information to respond to inquiries, evaluate requested services, communicate about projects, and operate and improve our business.</p>
-        <p>The website may use analytics and similar technologies to understand general website traffic and usage. Eros Publishing does not intend to sell personal information submitted through publishing inquiries. Information may be shared with service providers when reasonably necessary to operate the website or provide an agreed service, or when disclosure is required by law.</p>
+        <p>We use third-party providers for specific functions: Google Analytics for site traffic, Formspree for author inquiry submissions, PayPal for optional author tips, and Lulu or linked retailers for book purchases. Each provider may process data under its own privacy terms; purchases made on third-party sites are governed by those providers. The website may use analytics and similar technologies to understand general website traffic and usage. Eros Publishing does not intend to sell personal information submitted through publishing inquiries. Information may be shared with service providers when reasonably necessary to operate the website or provide an agreed service, or when disclosure is required by law.</p>
         <p>Please do not send confidential material, full unpublished manuscripts, financial information, or other sensitive information until an appropriate submission or service process has been established. Reasonable measures may be used to protect information, but no internet transmission or electronic storage system can be guaranteed to be completely secure.</p>
-        <p>To ask about personal information you have submitted through the site, contact <a href="mailto:authors@erospublishingkc.com">authors@erospublishingkc.com</a>.</p>
+        <p>For questions about access, correction or deletion of information you sent us, write to the address below; we will review the request subject to applicable record-keeping obligations and vendor policies. Third-party providers may maintain separate records and controls. To ask about personal information you have submitted through the site, contact <a href="mailto:authors@erospublishingkc.com">authors@erospublishingkc.com</a>.</p>
       </section>
 
       <section id="terms">

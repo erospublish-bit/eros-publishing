@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://erospublishingkc.com/sitemap.xml

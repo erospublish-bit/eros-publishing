@@ -1,8 +1,15 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 import beros from '../../images/beros.jpeg';
 
+export const metadata: Metadata = {
+  title: 'Our Story & Founder',
+  description: 'Meet the founder of Eros Publishing in Kansas City and learn about our author-first approach to independent publishing.',
+  alternates: { canonical: '/about/' },
+  openGraph: { title: 'Our Story & Founder | Eros Publishing', description: 'Meet the founder and discover the values behind Eros Publishing.', url: '/about/', images: [{ url: beros.src, alt: 'Eros Publishing founder portrait' }] },
+};
 export default function AboutPage() {
   return (
     <PageShell
@@ -44,6 +51,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section><h2 className="page-section-heading">Explore the publishing work</h2><p>See how our featured suspense title moved from manuscript development to a published book with print, digital and listening options.</p><p><Link className="text-link" href="/portfolio/no-love-lost-in-the-village/">View the flagship publishing case study →</Link></p></section>
       <section className="page-cta-panel">
         <h2>Ready to bring your manuscript to life?</h2>
         <p>Tell us about your book, your goals, and the publishing support you need.</p>

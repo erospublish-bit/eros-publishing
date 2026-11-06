@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { trackPublicEvent } from '@/lib/analytics';
 
 type PayPalButtons = { render: (element: HTMLElement) => Promise<void> };
 type PayPalSDK = { Buttons: (options: Record<string, unknown>) => PayPalButtons };
@@ -18,12 +19,13 @@ export function AuthorTip() {
   const container = useRef<HTMLDivElement>(null);
   const amount = choice === 'custom' ? custom : choice;
   const valid = /^(?:[1-9]\d{0,3}|10000)(?:\.\d{1,2})?$/.test(amount) && Number(amount) <= 10000;
+  const orderBinding = useRef('');
   const selectedAmount = useRef(amount);
-  selectedAmount.current = amount;
+  useEffect(() => { selectedAmount.current = amount; }, [amount]);
 
   useEffect(() => {
     if (!enabled || !clientId) return;
-    if (window.paypal) { setSdkReady(true); return; }
+    if (window.paypal) { queueMicrotask(() => setSdkReady(true)); return; }
     const script = document.createElement('script');
     script.src = 'https://www.paypal.com/sdk/js?client-id=' + encodeURIComponent(clientId) + '&currency=USD&intent=capture';
     script.async = true;
@@ -43,14 +45,15 @@ export function AuthorTip() {
         setError('');
         const response = await fetch('/api/tips/create-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ amount: selectedAmount.current }) });
         const data = await response.json();
-        if (!response.ok || !data.id) throw new Error(data.error || 'Unable to start checkout');
+        if (!response.ok || !data.id || !data.binding) throw new Error(data.error || 'Unable to start checkout');
+        orderBinding.current = data.binding;
         return data.id;
       },
       onApprove: async (data: { orderID: string }) => {
-        const response = await fetch('/api/tips/capture-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ orderId: data.orderID }) });
+        const response = await fetch('/api/tips/capture-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ orderId: data.orderID, binding: orderBinding.current }) });
         const result = await response.json();
         if (!response.ok || result.status !== 'COMPLETED') throw new Error(result.error || 'Payment confirmation failed');
-        if (active) setSuccess(true);
+        if (active) { setSuccess(true); trackPublicEvent('tip_completed', { payment_provider: 'paypal' }); }
       },
       onError: (err: unknown) => { if (active) setError(err instanceof Error ? err.message : 'PayPal checkout encountered an error.'); },
       onCancel: () => { if (active) setError('Checkout was cancelled. No payment was confirmed.'); },

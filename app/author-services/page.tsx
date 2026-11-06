@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Self-Publishing Services for Authors | Eros Publishing',
+  title: 'Self-Publishing Services for Authors',
   description:
     'Professional manuscript preparation, cover and interior design, self-publishing guidance, and answers to common author publishing questions from Eros Publishing.',
   alternates: { canonical: '/author-services' },
@@ -165,10 +165,12 @@ export default function AuthorServicesPage() {
       accent="a professional path to publication."
       intro="Eros Publishing helps independent authors move from manuscript to publication with thoughtful preparation, professional book design, and practical self-publishing support tailored to each project."
     >
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
 
-      <section>
+      <nav className="section-jumps" aria-label="Service navigation"><a href="#service-categories">Service categories</a><a href="#author-faq">Author FAQ</a><Link href="/publishing-pricing/">Pricing</Link><Link href="/publishing-quote/">Free inquiry</Link></nav>
+      <section id="service-categories">
         <h2 className="page-section-heading">Publishing services built around your book</h2>
+        <p className="page-lead">Start with manuscript assessment and editing, then book design/formatting, and finally publication/distribution. Exact timing and starting costs depend on word count and scope; <Link href="/publishing-pricing/">compare our published rates</Link>.</p>
         <p className="page-lead">
           Every manuscript is different. Rather than forcing your book into a one-size-fits-all package,
           Eros Publishing creates a custom project scope based on your manuscript, publishing goals, and
