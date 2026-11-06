@@ -17,7 +17,7 @@ export default function LegalPage() {
       intro="Clear expectations protect authors, readers, and the creative work entrusted to Eros Publishing. Review the policies that govern use of our website and publishing-service relationships."
     >
       <section>
-        <p className="page-lead"><strong>Last updated: November 3, 2026.</strong> These website policies provide general terms for Eros Publishing. Individual publishing projects may also be governed by a separate written service agreement, proposal, or statement of work. If a signed agreement conflicts with these general service policies, the signed agreement controls for that project.</p>
+        <p className="page-lead"><strong>Last updated: November 6, 2026.</strong> These website policies provide general terms for Eros Publishing. Individual publishing projects may also be governed by a separate written service agreement, proposal, or statement of work. If a signed agreement conflicts with these general service policies, the signed agreement controls for that project.</p>
 
         <div className="page-card-grid">
           <article className="page-card"><div className="card-icon">01</div><h3>Privacy</h3><p>How information submitted through this website may be collected, used, and protected.</p></article>
