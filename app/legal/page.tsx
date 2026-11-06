@@ -3,8 +3,9 @@ import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Legal & Publishing Policies | Eros Publishing',
+  title: 'Legal & Publishing Policies',
   description: 'Review Eros Publishing privacy, terms, refund and cancellation, copyright and DMCA, and publishing-services policies.',
+  alternates: { canonical: '/legal/' },
 };
 
 export default function LegalPage() {

@@ -5,7 +5,7 @@ import { PageShell } from '@/components/PageShell';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
 export const metadata: Metadata = {
-  title: 'Books & Editions | Eros Publishing',
+  title: 'Books & Editions',
   description: 'Explore suspense fiction from Eros Publishing. Compare paperback, hardcover, e-book, and audiobook editions and choose where to buy or listen.',
   alternates: { canonical: 'https://erospublishingkc.com/books' },
 };

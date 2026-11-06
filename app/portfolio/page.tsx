@@ -6,7 +6,7 @@ import { PageShell } from '@/components/PageShell';
 import { books } from '@/lib/books';
 
 export const metadata: Metadata = {
-  title: 'Published Work & Case Studies | Eros Publishing',
+  title: 'Published Work & Case Studies',
   description: 'Explore books developed and published with Eros Publishing and see the editorial, design, production, and distribution work behind each project.',
   alternates: { canonical: 'https://erospublishingkc.com/portfolio' },
 };

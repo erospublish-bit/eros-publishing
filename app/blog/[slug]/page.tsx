@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!article) return {};
   const url = `https://erospublishingkc.com/blog/${article.slug}`;
   return {
-    title: `${article.title} | Eros Publishing`, description: article.description,
+    title: article.title, description: article.description,
     alternates: { canonical: url },
     openGraph: { title: article.title, description: article.description, url, type: 'article', publishedTime: article.date, authors: ['Eros Publishing'] }
   };

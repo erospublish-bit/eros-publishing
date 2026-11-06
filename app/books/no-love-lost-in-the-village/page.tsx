@@ -11,7 +11,7 @@ const bookUrl = 'https://erospublishingkc.com/books/no-love-lost-in-the-village'
 const coverUrl = new URL(book.cover, 'https://erospublishingkc.com').toString();
 
 export const metadata: Metadata = {
-  title: 'No Love Lost in the Village by B. Eros | Eros Publishing',
+  title: 'No Love Lost in the Village by B. Eros',
   description:
     'Discover No Love Lost in the Village by B. Eros, a dark suspense novel about corruption, betrayal, power, and the dangerous price of exposing the truth.',
   alternates: {

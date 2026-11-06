@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Self-Publishing Services for Authors | Eros Publishing',
+  title: 'Self-Publishing Services for Authors',
   description:
     'Professional manuscript preparation, cover and interior design, self-publishing guidance, and answers to common author publishing questions from Eros Publishing.',
   alternates: { canonical: '/author-services' },

@@ -5,7 +5,7 @@ import { PageShell } from '@/components/PageShell';
 import { blogArticles } from '@/lib/blog';
 
 export const metadata: Metadata = {
-  title: 'Self-Publishing Guides & Author Resources | Eros Publishing',
+  title: 'Self-Publishing Guides & Author Resources',
   description: 'Practical self-publishing guides covering publishing costs, book formatting, royalties, ISBNs, distribution, Lulu, Amazon KDP, and the path from manuscript to market.',
   alternates: { canonical: 'https://erospublishingkc.com/blog' },
   openGraph: { title: 'The Eros Journal | Self-Publishing Guides', description: 'Practical guidance for independent authors from manuscript to market.', url: 'https://erospublishingkc.com/blog', type: 'website' }
