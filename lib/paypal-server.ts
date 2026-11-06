@@ -84,7 +84,7 @@ export function matchesTipAmount(data: PayPalOrder, expectedAmount: string) {
 
 export function matchingCaptures(data: PayPalOrder, expectedAmount: string) {
   if (!matchesTipAmount(data, expectedAmount) || data?.status !== 'COMPLETED') return false;
-  const captures = data.purchase_units[0]?.payments?.captures;
+  const captures = data.purchase_units?.[0]?.payments?.captures;
   return Array.isArray(captures) && captures.some((capture) =>
     capture?.status === 'COMPLETED' &&
     capture?.amount?.currency_code === 'USD' &&
