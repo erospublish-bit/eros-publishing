@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
+import { TrackedRetailerLink } from '@/components/TrackedRetailerLink';
 import { books, type Book, type BookFormat } from '@/lib/books';
 
 export const metadata: Metadata = {
@@ -75,8 +76,8 @@ export default function BooksPage() {
                   <div className="book-shop-format-links" key={book.id}>
                     <strong>{book.title}</strong>
                     <Link href={`/books/${book.id}#${id === 'paperback' ? 'edition-paperback' : id === 'hardcover' ? 'edition-hardcover' : id === 'ebooks' ? 'edition-ebook' : 'edition-audiobook'}`}>{action} →</Link>
-                    {format === 'Ebook' && book.ebookLinks?.map(({label,url})=><a href={url} key={label} target="_blank" rel="noopener noreferrer">{label} ↗</a>)}
-                    {format === 'Audiobook' && book.audiobookUrl && <a href={book.audiobookUrl} target="_blank" rel="noopener noreferrer">Listen on Spotify ↗</a>}
+                    {format === 'Ebook' && book.ebookLinks?.map(({label,url})=><TrackedRetailerLink href={url} key={label} provider={label}>{label} ↗</TrackedRetailerLink>)}
+                    {format === 'Audiobook' && book.audiobookUrl && <TrackedRetailerLink href={book.audiobookUrl} provider="Spotify">Listen on Spotify ↗</TrackedRetailerLink>}
                   </div>
                 )) : <p>No editions currently listed in this format.</p>}
               </section>

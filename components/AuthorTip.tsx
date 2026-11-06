@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { trackPublicEvent } from '@/lib/analytics';
 
 type PayPalButtons = { render: (element: HTMLElement) => Promise<void> };
 type PayPalSDK = { Buttons: (options: Record<string, unknown>) => PayPalButtons };
@@ -52,7 +53,7 @@ export function AuthorTip() {
         const response = await fetch('/api/tips/capture-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ orderId: data.orderID, binding: orderBinding.current }) });
         const result = await response.json();
         if (!response.ok || result.status !== 'COMPLETED') throw new Error(result.error || 'Payment confirmation failed');
-        if (active) setSuccess(true);
+        if (active) { setSuccess(true); trackPublicEvent('tip_completed', { payment_provider: 'paypal' }); }
       },
       onError: (err: unknown) => { if (active) setError(err instanceof Error ? err.message : 'PayPal checkout encountered an error.'); },
       onCancel: () => { if (active) setError('Checkout was cancelled. No payment was confirmed.'); },

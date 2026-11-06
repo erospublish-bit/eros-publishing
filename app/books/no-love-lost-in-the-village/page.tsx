@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Script from 'next/script';
 import { PageShell } from '@/components/PageShell';
 import { AuthorTip } from '@/components/AuthorTip';
+import { TrackedRetailerLink } from '@/components/TrackedRetailerLink';
 import { books } from '@/lib/books';
 
 const book = books.find((item) => item.id === 'no-love-lost-in-the-village')!;
@@ -88,14 +89,14 @@ export default function NoLoveLostInTheVillagePage() {
           <p><a className="button button-primary" href="#editions">Choose your edition ↓</a></p>
           <div className="book-detail-actions">
             {book.ebookLinks?.map(({ label, url }) => (
-              <a className="button button-primary" key={label} href={url} target="_blank" rel="noopener noreferrer">
+              <TrackedRetailerLink className="button button-primary" key={label} href={url} provider={label}>
                 E-book on {label} ↗
-              </a>
+              </TrackedRetailerLink>
             ))}
             {book.audiobookUrl && (
-              <a className="button book-secondary-button" href={book.audiobookUrl} target="_blank" rel="noreferrer">
+              <TrackedRetailerLink className="button book-secondary-button" href={book.audiobookUrl} provider="Spotify">
                 Listen on Spotify ↗
-              </a>
+              </TrackedRetailerLink>
             )}
           </div>
         </div>
