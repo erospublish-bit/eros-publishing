@@ -26,8 +26,9 @@ const sections = [
 export default function AuthorAgreementsPage() {
   return (
     <PageShell eyebrow="FOR AUTHOR CLIENTS" title="Clear terms for" accent="your book." intro="Review the documents used to define publishing work, safeguard author ownership, and confirm publication decisions before a project moves forward.">
+      <nav className="section-jumps" aria-label="Agreement contents"><a href="#services-agreement">Services agreement</a><a href="#statement-of-work">Statement of work</a><a href="#publication-approval">Publication approval</a><Link href="/author-agreements/forms/">Fillable drafts</Link></nav>
       <section>
-        <p className="page-lead"><strong>Review templates — not an executed contract.</strong> These example provisions help you understand our process. A custom, completed and mutually accepted agreement and statement of work are required before paid services begin. They are not a substitute for legal advice.</p>
+        <p className="page-lead"><strong>Review templates — not an executed contract.</strong> These example provisions help you understand our process. A custom, completed and mutually accepted agreement and statement of work are required before paid services begin. They are not a substitute for legal advice and have not been represented as independently attorney-approved. Template review version: November 2026.</p>
         <p><Link className="button button-primary" href="/author-agreements/forms">Open Fillable Agreement Forms →</Link></p>
         <div className="page-card-grid">
           <article className="page-card"><div className="card-icon">01</div><h3>Author Services Agreement</h3><p>Defines the relationship, copyright permissions, payment standards, approval rights, confidentiality and cancellation process.</p><a className="text-link" href="#services-agreement">Review agreement →</a></article>
