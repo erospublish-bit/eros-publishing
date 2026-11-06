@@ -29,7 +29,7 @@ export default function CaseStudyPage() {
           <Image src={book.cover} alt={`Cover of ${book.title} by ${book.author}`} width={800} height={800} priority sizes="(max-width: 800px) 92vw, 38vw" style={{ width: '100%', height: 'auto' }} />
         </div>
         <div className="book-detail-copy">
-          <div className="card-icon">PROJECT OVERVIEW</div>
+          <div className="card-icon">PUBLISHER'S OWN PROJECT · PROJECT OVERVIEW</div>
           <h2 className="page-section-heading">From story to <em>published title.</em></h2>
           <p className="page-lead"><em>No Love Lost in the Village</em> is a suspense novel by B. Eros centered on corruption, betrayal, accountability, and the cost of exposing the truth.</p>
           <p>The project required more than simply uploading a manuscript. The book moved through story development and editorial revision, presentation and cover work, publication preparation, format decisions, and distribution setup.</p>
@@ -38,6 +38,15 @@ export default function CaseStudyPage() {
         </div>
       </section>
 
+      <section aria-labelledby="case-study-summary">
+        <h2 id="case-study-summary" className="page-section-heading">Project at a glance</h2>
+        <div className="page-card-grid">
+          <article className="page-card"><h3>Challenge</h3><p>Prepare a suspense manuscript for a consistent print and digital presentation.</p></article>
+          <article className="page-card"><h3>Work illustrated</h3><p>Editorial revision, cover presentation, interior preparation, metadata, edition planning, retailer setup.</p></article>
+          <article className="page-card"><h3>Visible outcome</h3><p>Public paperback and hardcover purchase options, linked digital editions and audiobook access. Sales performance is not claimed.</p></article>
+        </div>
+        <p>This is Eros Publishing's own flagship book, not an independent client case study. Third-party providers handle retailer distribution, printing and customer purchases.</p>
+      </section>
       <section>
         <div className="section-heading"><div><div className="eyebrow"><span /> THE CHALLENGE</div><h2>Turn a manuscript into a <em>complete book package.</em></h2></div></div>
         <p className="page-lead">A finished story still has to become a finished product. The project called for a consistent narrative, professional presentation, publication-ready assets, and a practical route to readers across multiple formats.</p>

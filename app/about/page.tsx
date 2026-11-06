@@ -51,6 +51,7 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section><h2 className="page-section-heading">Explore the publishing work</h2><p>See how our featured suspense title moved from manuscript development to a published book with print, digital and listening options.</p><p><Link className="text-link" href="/portfolio/no-love-lost-in-the-village/">View the flagship publishing case study →</Link></p></section>
       <section className="page-cta-panel">
         <h2>Ready to bring your manuscript to life?</h2>
         <p>Tell us about your book, your goals, and the publishing support you need.</p>

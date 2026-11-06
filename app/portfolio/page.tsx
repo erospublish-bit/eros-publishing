@@ -27,7 +27,7 @@ export default function PortfolioPage() {
           <div>
             <div className="eyebrow"><span /> FEATURED CASE STUDY</div>
             <h2>Proof in the <em>finished work.</em></h2>
-            <p>Our portfolio focuses on the work behind publication—not unsupported promises about sales or bestseller status.</p>
+            <p>Our first documented project is the publisher's own title, presented as a production example—not as proof of external client results or sales guarantees.</p>
           </div>
         </div>
 
@@ -36,7 +36,7 @@ export default function PortfolioPage() {
             <Image src={book.cover} alt={`Cover of ${book.title} by ${book.author}`} width={360} height={360} sizes="(max-width: 800px) 46vw, 19vw" style={{ width: '50%', maxWidth: '360px', height: 'auto' }} />
           </div>
           <div className="book-detail-copy">
-            <div className="card-icon">FLAGSHIP PROJECT</div>
+            <div className="card-icon">PUBLISHER'S OWN FLAGSHIP BOOK · NOT AN INDEPENDENT CLIENT TESTIMONIAL</div>
             <h2 className="page-section-heading"><em>{book.title}</em></h2>
             <p className="page-lead">From manuscript development to a finished book available across multiple formats and publishing platforms.</p>
             <p><strong>Author:</strong> {book.author}<br/><strong>Genre:</strong> Suspense / Crime Fiction<br/><strong>Project:</strong> Independent publication</p>

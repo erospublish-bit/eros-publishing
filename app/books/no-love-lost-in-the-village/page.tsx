@@ -85,6 +85,7 @@ export default function NoLoveLostInTheVillagePage() {
             Armed with evidence, determination, and a refusal to carry the blame for someone else&apos;s actions, Raz discovers that the closer you get to the truth, the harder it becomes to know who you can trust.
           </p>
 
+          <p><a className="button button-primary" href="#editions">Choose your edition ↓</a></p>
           <div className="book-detail-actions">
             {book.ebookLinks?.map(({ label, url }) => (
               <a className="button button-primary" key={label} href={url} target="_blank" rel="noopener noreferrer">
@@ -102,13 +103,14 @@ export default function NoLoveLostInTheVillagePage() {
 
       <section id="editions">
         <h2 className="page-section-heading">Choose your edition</h2>
-        <p className="page-lead">Read it in print or e-book format, or experience the story as an audiobook.</p>
+        <p className="page-lead">Read it in print or e-book format, or experience the story as an audiobook. Retailers handle checkout, delivery and availability; final prices and taxes are shown by the provider.</p>
         {(book.luluBuyButtonId || book.hardcoverLuluBuyButtonId) && <Script src="https://js.lulu.com/lulu-buy.js" strategy="afterInteractive" />}
         <div className="book-edition-grid">
           <article className="page-card book-edition-card" id="edition-paperback">
             <div className="card-icon">PRINT · PAPERBACK</div>
             <h3>Paperback</h3>
             <p>Enjoy the story in a flexible print format. Order securely through Lulu, which handles pricing, printing, and fulfillment.</p>
+            <p className="retailer-fallback">If the Lulu checkout widget does not display, please <Link href="/contact/">contact us</Link> for the current print purchase route.</p>
             {book.luluBuyButtonId && (
               // @ts-expect-error Lulu defines this custom element in its external script.
               <lulu-buy-button buy-button-id={book.luluBuyButtonId} variant={book.luluVariant || 'product-showcase'} />
@@ -120,6 +122,7 @@ export default function NoLoveLostInTheVillagePage() {
               <div className="card-icon">PRINT · HARDCOVER</div>
               <h3>Hardcover</h3>
               <p>Choose a durable hardcover for your personal library or as a gift. Lulu handles the order, printing, and delivery.</p>
+              <p className="retailer-fallback">If the Lulu widget does not load, <Link href="/contact/">ask for an alternate purchase route</Link>.</p>
               {/* @ts-expect-error Lulu defines this custom element in its external script. */}
               <lulu-buy-button buy-button-id={book.hardcoverLuluBuyButtonId} variant={book.luluVariant || 'product-showcase'} />
             </article>

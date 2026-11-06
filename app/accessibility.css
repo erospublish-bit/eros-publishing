@@ -23,3 +23,10 @@ body { font-size: 16px; line-height: 1.6; }
   html { scroll-behavior: auto !important; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
 }
+
+.table-scroll { overflow-x: auto; margin: 24px 0; }
+.edition-table { width: 100%; border-collapse: collapse; min-width: 610px; background: #fffaf5; }
+.edition-table th, .edition-table td { border-bottom: 1px solid #e8dcd4; padding: 14px; text-align: left; vertical-align: top; }
+.edition-table thead { background: #f0e3dc; }
+.edition-table a, .retailer-fallback a { text-decoration: underline; text-underline-offset: 3px; color: #8f2636; }
+.retailer-fallback { font-size: 13px; color: #514345; margin: 12px 0; }
