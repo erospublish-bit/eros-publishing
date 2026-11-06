@@ -1,0 +1,10 @@
+# Keep Netlify as the sole production host. GitHub Actions handles tests only.
+# Limit payment API requests per client IP; verify rules in the deploy log.
+[[redirects]]
+  from = "/api/tips/*"
+  to = "/api/tips/:splat"
+  status = 200
+  [redirects.rate_limit]
+    window_limit = 12
+    window_size = 60
+    aggregate_by = ["ip", "domain"]

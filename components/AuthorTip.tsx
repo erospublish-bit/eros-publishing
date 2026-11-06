@@ -18,6 +18,7 @@ export function AuthorTip() {
   const container = useRef<HTMLDivElement>(null);
   const amount = choice === 'custom' ? custom : choice;
   const valid = /^(?:[1-9]\d{0,3}|10000)(?:\.\d{1,2})?$/.test(amount) && Number(amount) <= 10000;
+  const orderBinding = useRef('');
   const selectedAmount = useRef(amount);
   selectedAmount.current = amount;
 
@@ -43,11 +44,12 @@ export function AuthorTip() {
         setError('');
         const response = await fetch('/api/tips/create-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ amount: selectedAmount.current }) });
         const data = await response.json();
-        if (!response.ok || !data.id) throw new Error(data.error || 'Unable to start checkout');
+        if (!response.ok || !data.id || !data.binding) throw new Error(data.error || 'Unable to start checkout');
+        orderBinding.current = data.binding;
         return data.id;
       },
       onApprove: async (data: { orderID: string }) => {
-        const response = await fetch('/api/tips/capture-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ orderId: data.orderID }) });
+        const response = await fetch('/api/tips/capture-order', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ orderId: data.orderID, binding: orderBinding.current }) });
         const result = await response.json();
         if (!response.ok || result.status !== 'COMPLETED') throw new Error(result.error || 'Payment confirmation failed');
         if (active) setSuccess(true);
