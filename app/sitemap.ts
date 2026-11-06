@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const caseStudies = [{ url: new URL('/portfolio/no-love-lost-in-the-village/', base).toString() }];
   const articles = blogArticles.map(article => ({
     url: new URL(`/blog/${article.slug}/`, base).toString(),
-    lastModified: new Date(`${article.date}T12:00:00Z`),
+    lastModified: new Date('2026-11-06T12:00:00Z'),
   }));
   return [...pages, ...bookPages, ...caseStudies, ...articles];
 }

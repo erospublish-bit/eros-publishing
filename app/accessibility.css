@@ -37,3 +37,9 @@ body { font-size: 16px; line-height: 1.6; }
 
 fieldset.quote-options { border: 0; margin: 0; padding: 0; min-width: 0; }
 #quote-about, #quote-book, #quote-services, #quote-distribution, #quote-goals, #quote-review { scroll-margin-top: 135px; }
+
+.blog-extra { background:#fffaf5; border:1px solid #e8dcd4; border-radius:12px; padding:clamp(18px, 3vw, 36px); margin:32px 0; }
+.blog-extra h2 { font-family:Georgia,serif; color:#541923; font-size:clamp(24px, 3vw, 32px); }
+.blog-extra li { margin-bottom:10px; }
+.blog-resources a { color:#8f2636; text-decoration:underline; text-underline-offset:3px; }
+.blog-article section[id] { scroll-margin-top:135px; }
