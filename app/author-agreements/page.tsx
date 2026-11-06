@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PageShell } from '@/components/PageShell';
 
 export const metadata: Metadata = {
-  title: 'Author Agreements & Project Documents | Eros Publishing',
+  title: 'Author Agreements & Project Documents',
   description: 'Review Eros Publishing author-services agreement, project statement of work, and publication approval templates before commissioning publishing services.',
   alternates: { canonical: '/author-agreements' },
 };

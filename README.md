@@ -1,105 +1,50 @@
-# Eros Publishing — storefront
+# Eros Publishing — Production website
 
-A responsive, mythology-inspired red/burgundy storefront for **erospublishingkc.com**, built with Next.js, React, TypeScript, and custom CSS.
+Next.js App Router, TypeScript, React website for https://erospublishingkc.com.
+**Production hosting: Netlify.** GitHub is the source of truth; GitHub Pages is not a deployment target.
 
-## What's included
+## Features and locations
+- Books/retailer links and Lulu widgets: `lib/books.ts`, `app/books/`
+- Articles: `lib/blog.ts`, `app/blog/`
+- Publishing pricing and self-publishing services: `app/publishing-pricing/`, `app/author-services/`
+- Formspree quick and detailed request forms: `app/publishing-quote/`
+- Browser-local printable draft agreements, not e-signatures: `components/AgreementForms.tsx`
+- PayPal author tips: `components/AuthorTip.tsx`, `app/api/tips/`
+- Site SEO: `app/layout.tsx`, `app/sitemap.ts`, `app/robots.ts`, per-page metadata
 
-- Responsive landing page with Greek-mythology-inspired visual language
-- Sample book catalog with title/author/genre search
-- Format selector (ebook, paperback, hardcover, audiobook where applicable)
-- Interactive shopping bag with quantity controls and subtotal
-- Author services section and email inquiry link
-- About section and responsive navigation
-- SEO title and description starter metadata
-
-## Important before launch
-
-This is a **front-end starter**, not a live commerce system. The checkout button is intentionally a demo placeholder. It does not accept payment, create orders, deliver files, calculate shipping/tax, or store a cart across sessions. Replace sample titles, prices, and contact emails with real business information. Before taking orders, add a payment provider (such as Stripe), server-side checkout/order creation, fulfillment for physical books, and secure digital delivery for ebooks/audiobooks. Configure privacy, returns, terms, tax, and accessibility as appropriate for your business.
-
-## 1. Install the tools
-
-1. Install Node.js LTS from https://nodejs.org/ if it isn't installed already.
-2. Open Visual Studio Code.
-3. Download and unzip this project.
-4. In VS Code, choose **File → Open Folder…** and select `eros-publishing-starter`.
-5. Choose **Terminal → New Terminal**.
-
-Check Node and npm:
-
-```bash
-node -v
-npm -v
-```
-
-## 2. Run the site locally
-
-In the VS Code terminal, run:
-
-```bash
-npm install
+## Local workflow
+Install Node.js 22 LTS.
+```sh
+npm ci
 npm run dev
+npm run lint
+npm run typecheck
+npm run build
 ```
 
-Open http://localhost:3000 in your browser. Leave the terminal running while you work. Press `Ctrl+C` in the terminal to stop the development server.
+## Releases
+1. Create a feature branch; keep `main` untouched until every page is reviewed.
+2. Validate critical routes, forms, payment sandbox, keyboard/mobile behavior and metadata.
+3. Run GitHub CI (lint, typecheck, build) and CodeQL.
+4. Merge to `main` **once** for one Netlify production release.
+5. Check the Netlify production deploy, key paths, headers, orders and contact form. If needed, restore the prior known-good Netlify deploy.
 
-If you see a missing-package error, confirm you are in the project folder and rerun `npm install`.
+Do not enable a separate GitHub Pages deployment. The site sells books via external retailers, not a built-in shopping cart.
 
-## 3. Make your first edits
+## Environment variables
+These belong in Netlify deployment environment settings, not in Git:
+- `PAYPAL_CLIENT_ID`, `PAYPAL_CLIENT_SECRET`, `PAYPAL_ENVIRONMENT`
+- `NEXT_PUBLIC_PAYPAL_CLIENT_ID`, `NEXT_PUBLIC_PAYPAL_CHECKOUT_ENABLED`
+- `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` (optional)
+- `PAYPAL_MERCHANT_ID` (recommended for server-side payee verification)
 
-- **Catalog:** edit `lib/books.ts` to change sample book titles, descriptions, formats, and prices.
-- **Page content and interactions:** edit `components/Storefront.tsx`.
-- **Colors, layout, and mobile styling:** edit `app/globals.css`. The main red theme values are near the top in `:root`.
-- **Browser title and description:** edit `app/layout.tsx`.
+Formspree endpoint IDs are public and are not secret keys. Configure provider anti-spam alerts and avoid collecting confidential manuscripts and banking credentials.
 
-The book covers in this starter are CSS-generated mockups, not final cover artwork. Replace them with properly licensed cover images when your catalog is ready.
+## Security / legal
+The `.env*` pattern is ignored. Do not log payment tokens or personal details in CI.
+CodeQL and CI check code health; follow `SECURITY.md` for private disclosure.
+Agreement templates need project-specific review and separate verified signatures when necessary.
+Privacy, cancellation and merchant disclosures require professional review before relying on them commercially.
 
-## 4. Put the project on GitHub
-
-1. Create a new, empty repository on https://github.com (for example `eros-publishing`). Do not add a README there if you already have this README locally.
-2. In the VS Code terminal, from this project folder, run:
-
-```bash
-git init
-git add .
-git commit -m "Create Eros Publishing storefront starter"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/eros-publishing.git
-git push -u origin main
-```
-
-Replace `YOUR-USERNAME` with your GitHub username and adjust the repository name if needed. If Git asks you to sign in, follow the browser authentication prompt. Git must be installed for these commands to work.
-
-For later updates:
-
-```bash
-git add .
-git commit -m "Describe my website change"
-git push
-```
-
-## 5. Publish a preview
-
-A beginner-friendly path is Vercel:
-
-1. Sign in at https://vercel.com using GitHub.
-2. Import the `eros-publishing` repository.
-3. Keep the detected Next.js settings and deploy.
-4. Once the preview works, add `erospublishkc.com` in the project's domain settings.
-5. Follow the DNS records Vercel shows, at the company where you registered the domain. Do not guess DNS values.
-6. Wait for domain verification and HTTPS to finish, then test on desktop and mobile.
-
-## Suggested next steps for real commerce
-
-1. Decide whether your own store or external retailer pages will fulfill each format.
-2. Add Stripe Checkout using server-side code and environment variables; never put secret keys in client-side code or commit `.env` files.
-3. Create a database for products, orders, customers, and service inquiries (for example Supabase).
-4. Set up physical fulfillment/shipping and protected ebook/audiobook delivery.
-5. Test successful and failed payments, refunds, order emails, taxes/shipping, and mobile checkout before launch.
-
-## Troubleshooting
-
-- **`npm` or `node` not found:** install Node.js LTS and restart VS Code.
-- **Port 3000 busy:** Next.js may offer another local port; use the URL printed in the terminal.
-- **Changes don't appear:** save the file, then refresh. If needed stop and restart `npm run dev`.
-- **Git push rejected:** check that the GitHub repository URL is correct and that you are authenticated.
-# eros-publishing
+## Robots and sitemaps
+Use `app/sitemap.ts` (built from book and blog datasets) and `app/robots.ts`. Do not add duplicate `public/sitemap.xml` or `public/robots.txt`.
