@@ -45,6 +45,17 @@ export async function paypalAccessToken(): Promise<string> {
   return data.access_token;
 }
 
+type Money = { currency_code?: string; value?: string };
+type PayPalOrder = {
+  id?: string;
+  status?: string;
+  purchase_units?: Array<{
+    amount?: Money;
+    payee?: { merchant_id?: string };
+    payments?: { captures?: Array<{ status?: string; amount?: Money }> };
+  }>;
+};
+
 export async function paypalOrderRequest(path: string, access: string, method: 'GET'|'POST', body?: object, requestId?: string) {
   const response = await fetch(paypalBase + path, {
     method,
@@ -56,12 +67,12 @@ export async function paypalOrderRequest(path: string, access: string, method: '
     ...(body ? { body: JSON.stringify(body) } : {}),
     cache: 'no-store', signal: AbortSignal.timeout(15000),
   });
-  let data: Record<string, unknown> = {};
-  try { data = await response.json(); } catch { /* Return generic provider error */ }
+  let data: PayPalOrder = {};
+  try { data = await response.json() as PayPalOrder; } catch { /* Return generic provider error */ }
   return { response, data };
 }
 
-export function matchesTipAmount(data: any, expectedAmount: string) {
+export function matchesTipAmount(data: PayPalOrder, expectedAmount: string) {
   const units = data?.purchase_units;
   if (!Array.isArray(units) || units.length !== 1) return false;
   const amount = units[0]?.amount;
@@ -71,10 +82,10 @@ export function matchesTipAmount(data: any, expectedAmount: string) {
     (!expectedMerchant || units[0]?.payee?.merchant_id === expectedMerchant);
 }
 
-export function matchingCaptures(data: any, expectedAmount: string) {
+export function matchingCaptures(data: PayPalOrder, expectedAmount: string) {
   if (!matchesTipAmount(data, expectedAmount) || data?.status !== 'COMPLETED') return false;
   const captures = data.purchase_units[0]?.payments?.captures;
-  return Array.isArray(captures) && captures.some((capture: any) =>
+  return Array.isArray(captures) && captures.some((capture) =>
     capture?.status === 'COMPLETED' &&
     capture?.amount?.currency_code === 'USD' &&
     capture?.amount?.value === expectedAmount
